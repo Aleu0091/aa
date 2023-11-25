@@ -75,7 +75,7 @@ img.resizeable {
     color: white;
     padding: 5px;
     box-sizing: border-box;
-    opacity: 1;
+    opacity: 90%;
     transition: opacity 0.3s ease;
     max-height: 50px;
     overflow: hidden;
@@ -85,13 +85,14 @@ img.resizeable {
 }
 
 .image-wrapper:hover .level-info {
-    opacity: 0;
+    opacity: 0%;
 }
 
 .level-label {
     position: absolute;
     top: 10px;
     left: 10px;
+    opacity: 90%;
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 5px;
