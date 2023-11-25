@@ -103,20 +103,23 @@ img.resizeable {
     text-align: center;
     height: 300px;
 }
-/* 스타일링 */
-/* 스타일링 */
 
 .button-container {
     text-align: center;
-    justify-content: center; /* 가로 가운데 정렬 */
+    display: flex;
+    flex-direction: column; /* 버튼들을 세로로 배치하기 위해 */
+    align-items: center;
 }
 
 .big-button {
-    padding: 30px 50px;
-    font-size: 24px;
+    padding: 50px 90px; /* 큰 패딩을 주어 버튼 크기 키우기 */
+    font-size: 30px; /* 텍스트 크기도 함께 키우기 */
     margin: 20px;
+    transition: transform 0.3s ease-in-out;
     border-radius: 20px;
 }
+
+/* 호버 시 크기 키우기 */
 .big-button:hover {
-    transform: scale(1.1); /* 10% 크게 확대 */
-} /* 스타일링 */
+    transform: scale(1.1);
+}
