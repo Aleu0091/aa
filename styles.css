@@ -119,4 +119,4 @@ img.resizeable {
 }
 .big-button:hover {
     transform: scale(1.1); /* 10% 크게 확대 */
-}
+} /* 스타일링 */
