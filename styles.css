@@ -95,7 +95,7 @@ img.resizeable {
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 5px;
-    border-radius: 15px;
+    border-radius: 10px;
     z-index: 2;
 }
 .project-container {
