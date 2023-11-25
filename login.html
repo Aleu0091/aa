@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>로그인</title>
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background: linear-gradient(to right, #ddd, #fff);
+            }
+
+            .login-form {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                width: 300px;
+                text-align: center;
+            }
+
+            .login-form h2 {
+                margin-bottom: 30px;
+                color: #333;
+            }
+
+            .login-form label {
+                display: block;
+                text-align: left;
+                margin-bottom: 8px;
+                color: #555;
+            }
+
+            .login-form input[type='text'],
+            .login-form input[type='password'] {
+                width: calc(100% - 22px);
+                padding: 10px;
+                margin-bottom: 20px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+
+            .login-form input[type='submit'] {
+                width: calc(100% - 22px);
+                padding: 10px;
+                border-radius: 4px;
+                border: none;
+                font-size: 16px;
+                color: #fff;
+                background-color: #3498db;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .login-form input[type='submit']:hover {
+                background-color: #2980b9;
+            }
+            /* ... (앞서 제시한 스타일 코드) ... */
+
+            .login-form .signup-link {
+                margin-top: 20px;
+            }
+
+            .login-form .signup-link a {
+                color: #3498db;
+                text-decoration: none;
+            }
+            /* ... (앞서 제시한 스타일 코드) ... */
+
+            .login-form .back-button {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+
+            .login-form .back-button a {
+                color: #3498db;
+                text-decoration: none;
+            }
+
+            .login-form .back-button {
+                padding: 8px 12px;
+                background-color: #3498db;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+            }
+
+            .login-form .back-button:hover {
+                background-color: #2980b9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="login-form">
+            <a href="javascript:history.go(-1)" class="back-button">뒤로가기</a>
+            <h2>로그인</h2>
+            <form id="loginForm">
+                <label for="username">사용자명</label>
+                <input type="text" id="username" name="username" required />
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required />
+                <input type="submit" value="로그인" />
+                <div class="signup-link">
+                    <a href="signup.html">회원가입</a>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // 폼 제출 기본 동작 방지
+
+                // 입력된 사용자명과 비밀번호 가져오기
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // AJAX를 이용한 로그인 요청
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'https://example.com/login', true); // 백엔드 URL 입력
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        alert('로그인 성공!');
+                    } else {
+                        alert('로그인 실패');
+                    }
+                };
+                const data = JSON.stringify({ username: username, password: password });
+                xhr.send(data);
+            });
+        </script>
+    </body>
+</html>
