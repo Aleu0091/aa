@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # 세션 보안을 위한 임의의 키 사용
+app.secret_key = 'asfgbdszxf'  # 세션 보안을 위한 임의의 키 사용
 
 # SQLite 데이터베이스 설정
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -30,23 +30,16 @@ with app.app_context():
     db.create_all()
 
 # 회원가입 라우트
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
 
-        # 이미 등록된 사용자인지 확인
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            return '해당 사용자명은 이미 사용 중입니다. 다른 이름을 선택해주세요.'
-
-        # 새로운 사용자 생성
         new_user = User(username=username, email=email)
-        new_user.set_password(password)
+        new_user.set_password(password)  # 비밀번호를 해싱하여 저장
 
-        # 데이터베이스에 추가하고 변경사항 저장
         db.session.add(new_user)
         db.session.commit()
 
@@ -55,7 +48,7 @@ def register():
     return render_template('register.html')  # 회원가입 페이지 렌더링
 
 # 로그인 라우트
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']

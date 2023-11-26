@@ -117,65 +117,44 @@
                 return true;
             }
 
-            function nextStep(currentStep) {
-                if (currentStep === 1) {
-                    document.getElementById('step1').style.display = 'none';
-                    document.getElementById('step2').style.display = 'block';
-                } else if (currentStep === 2) {
-                    if (!validatePassword()) {
-                        return;
-                    }
+            document.getElementById('registerForm').addEventListener('submit', function (event) {
+                event.preventDefault();
 
-                    document.getElementById('step2').style.display = 'none';
-                    document.getElementById('step3').style.display = 'block';
-                } else if (currentStep === 3) {
-                    document.getElementById('step3').style.display = 'none';
-                    document.getElementById('step4').style.display = 'block';
-                }
-            }
+                const formData = new FormData(this); // 폼 데이터 가져오기
+                const url = '/register'; // 서버의 회원가입 엔드포인트 주소
+
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data); // 서버 응답 출력
+                        // 원하는 동작 수행 (예: 성공적으로 가입되었다는 메시지를 사용자에게 보여주기)
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        // 에러 발생 시 처리 로직 추가
+                    });
+            });
         </script>
     </head>
     <body>
         <div class="signup-form">
             <a href="javascript:history.go(-1)" class="back-button">뒤로가기</a>
             <h2>회원 가입</h2>
-            <div id="step1">
-                <form onsubmit="event.preventDefault(); nextStep(1);">
-                    <form method="POST" action="/register">
-                        <label for="username">사용자명</label>
-                        <input type="text" id="username" name="username" required />
-                        <input type="submit" value="다음" />
-                    </form>
-                </form>
-            </div>
-
-            <div id="step2" style="display: none">
-                <form onsubmit="event.preventDefault(); nextStep(2);">
-                    <form method="POST" action="/register">
-                        <label for="email">이메일</label>
-                        <input type="email" id="email" name="email" required />
-                        <input type="submit" value="다음" />
-                    </form>
-                </form>
-            </div>
-
-            <div id="step3" style="display: none">
-                <form onsubmit="event.preventDefault(); nextStep(3);">
-                    <form method="POST" action="/register">
-                        <label for="password">비밀번호</label>
-                        <input type="password" id="password" name="password" required />
-                        <label for="confirmPassword">비밀번호 확인</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required />
-                        <span id="error" class="error-message">비밀번호가 일치하지 않습니다.</span>
-                        <input type="submit" value="확인" onclick="return validatePassword()" />
-                    </form>
-                </form>
-            </div>
-
-            <div id="step4" style="display: none">
-                <h3>회원 가입 완료!</h3>
-                <a href="/" class="home-button">홈으로 돌아가기</a>
-            </div>
+            <form id="registerForm" action="/register" method="POST">
+                <label for="username">사용자명</label>
+                <input type="text" id="username" name="username" required />
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" required />
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required />
+                <label for="confirmPassword">비밀번호 확인</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required />
+                <span id="error" class="error-message">비밀번호가 일치하지 않습니다.</span>
+                <input type="submit" value="회원 가입" onclick="return validatePassword()" />
+            </form>
         </div>
     </body>
 </html>
