@@ -9,6 +9,38 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+        <style>
+            /* 모바일에 대한 스타일 */
+            @media (max-width: 767px) {
+                /* 내비게이션 바를 햄버거 버튼으로 변경 */
+                .navbar-toggler {
+                    display: block;
+                }
+                .navbar-collapse {
+                    display: none;
+                }
+                .navbar-expand .navbar-collapse {
+                    display: none !important;
+                }
+                .navbar-toggler-icon {
+                    display: block;
+                    background-color: black;
+                }
+                .navbar-toggler:focus {
+                    outline: none;
+                }
+                .navbar-collapse.show {
+                    display: block;
+                }
+                /* 일부 요소를 가로 정렬로 변경 */
+                .nav-item {
+                    display: inline-block !important;
+                }
+                .nav-link {
+                    display: block !important;
+                }
+            }
+        </style>
     </head>
 
     <div class="container">
@@ -65,11 +97,10 @@
             <div class="col-sm-8 py-5 mx-auto">
                 <h1 id="text1" class="display-5 fw-normal">난독 치료 프로그램</h1>
                 <p id="text2" class="fs-5">이 프로그램은 공익을 위한 프로그램으로 개발 되어 100% 무료로 제공됩니다.</p>
-                
-                    <a id = "text3">시작을 하면</a>
-                    <a id = "text4" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="mx-1">이용약관</a>
-                    <a id = "text5">에 동의한 것으로 간주됩니다.</a>
-                </p>
+
+                <a id="text3">시작을 하면</a>
+                <a id="text4" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="mx-1">이용약관</a>
+                <a id="text5">에 동의한 것으로 간주됩니다.</a>
                 <p>
                     <a id="st_btn" class="btn btn-primary" href="/docs/5.3/components/navbar/#offcanvas" role="button"
                         >시작하기</a
@@ -87,13 +118,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="termsEnglish"style="display: none">
+                    <div id="termsEnglish" style="display: none">
                         Your information will be used for better learning through big data analysis. Also, it will be
                         safely destroyed automatically 15 days after withdrawal from the site. Department processing
                         requests for access to personal information: Security department
                         <br />Collected information: Pronunciation data, Name, Age, IP
                     </div>
-                    <div id="termsKorean" >
+                    <div id="termsKorean">
                         회원님의 정보는 회원님의 보다 더좋은 학습을 위해 빅데이터 학습으로 사용됩니다.<br />
                         또한 사이트 탈퇴시 15일뒤 자동으로 안전하게 파기됩니다.<br />개인정보의 열람청구를 접수·처리하는
                         부서 : 보안부서
@@ -235,7 +266,8 @@
                     document.getElementById('confirmBtn').innerText = '이해했습니다.';
                     document.getElementById('st_btn').innerText = '시작하기';
                     document.getElementById('text1').innerText = '난독 치료 프로그램';
-                    document.getElementById('text2').innerText = '이 프로그램은 공익을 위한 프로그램으로 개발 되어 100% 무료로 제공됩니다.';
+                    document.getElementById('text2').innerText =
+                        '이 프로그램은 공익을 위한 프로그램으로 개발 되어 100% 무료로 제공됩니다.';
                     document.getElementById('text3').innerText = '시작을 하면';
                     document.getElementById('text4').innerText = '이용약관';
                     document.getElementById('text5').innerText = '에 동의한 것으로 간주됩니다.';
@@ -246,7 +278,8 @@
                     document.getElementById('confirmBtn').innerText = '我明白了';
                     document.getElementById('st_btn').innerText = '入门';
                     document.getElementById('text1').innerText = '阅读障碍治疗计划';
-                    document.getElementById('text2').innerText = '该计划是作为一项公益计划而开发的，并且 100% 免费提供。';
+                    document.getElementById('text2').innerText =
+                        '该计划是作为一项公益计划而开发的，并且 100% 免费提供。';
                     document.getElementById('text3').innerText = '开始即表示您同意我们的';
                     document.getElementById('text4').innerText = '使用条款。';
                     document.getElementById('text5').innerText = '';
@@ -257,7 +290,8 @@
                     document.getElementById('confirmBtn').innerText = 'Tôi đã hiểu';
                     document.getElementById('st_btn').innerText = 'Bắt đầu';
                     document.getElementById('text1').innerText = 'Chương trình điều trị chứng khó đọc';
-                    document.getElementById('text2').innerText = 'Chương trình này được phát triển như một chương trình vì lợi ích công cộng và được cung cấp miễn phí 100%.';
+                    document.getElementById('text2').innerText =
+                        'Chương trình này được phát triển như một chương trình vì lợi ích công cộng và được cung cấp miễn phí 100%.';
                     document.getElementById('text3').innerText = 'Bằng cách bắt đầu, bạn đồng ý với ';
                     document.getElementById('text4').innerText = 'Điều khoản sử dụng ';
                     document.getElementById('text5').innerText = 'của chúng tôi.';
