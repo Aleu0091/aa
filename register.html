@@ -139,31 +139,36 @@
         <div class="signup-form">
             <a href="javascript:history.go(-1)" class="back-button">뒤로가기</a>
             <h2>회원 가입</h2>
-
             <div id="step1">
                 <form onsubmit="event.preventDefault(); nextStep(1);">
-                    <label for="username">사용자명</label>
-                    <input type="text" id="username" name="username" required />
-                    <input type="submit" value="다음" />
+                    <form method="POST" action="/register">
+                        <label for="username">사용자명</label>
+                        <input type="text" id="username" name="username" required />
+                        <input type="submit" value="다음" />
+                    </form>
                 </form>
             </div>
 
             <div id="step2" style="display: none">
                 <form onsubmit="event.preventDefault(); nextStep(2);">
-                    <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" required />
-                    <input type="submit" value="다음" />
+                    <form method="POST" action="/register">
+                        <label for="email">이메일</label>
+                        <input type="email" id="email" name="email" required />
+                        <input type="submit" value="다음" />
+                    </form>
                 </form>
             </div>
 
             <div id="step3" style="display: none">
                 <form onsubmit="event.preventDefault(); nextStep(3);">
-                    <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" required />
-                    <label for="confirmPassword">비밀번호 확인</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required />
-                    <span id="error" class="error-message">비밀번호가 일치하지 않습니다.</span>
-                    <input type="submit" value="확인" onclick="return validatePassword()" />
+                    <form method="POST" action="/register">
+                        <label for="password">비밀번호</label>
+                        <input type="password" id="password" name="password" required />
+                        <label for="confirmPassword">비밀번호 확인</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required />
+                        <span id="error" class="error-message">비밀번호가 일치하지 않습니다.</span>
+                        <input type="submit" value="확인" onclick="return validatePassword()" />
+                    </form>
                 </form>
             </div>
 
