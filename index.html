@@ -115,6 +115,7 @@
                 <a id="text4" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="mx-1">이용약관</a>
                 <a id="text5">에 동의한 것으로 간주됩니다.</a>
                 <p>
+                    <br />
                     <a id="st_btn" class="btn btn-primary" href="/docs/5.3/components/navbar/#offcanvas" role="button"
                         >시작하기</a
                     >
@@ -157,7 +158,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeBtn">닫기</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirmBtn">
                         이해 했습니다.
                     </button>
@@ -179,28 +179,6 @@
     <div class="container">
         <footer class="py-5">
             <div class="row">
-                <div class="col-6 col-md-2 mb-3">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-6 col-md-2 mb-3">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-                    </ul>
-                </div>
-
                 <div class="col-6 col-md-2 mb-3">
                     <h5>Section</h5>
                     <ul class="nav flex-column">
@@ -264,7 +242,6 @@
                 if (lang === 'en') {
                     showContent('termsEnglish');
                     document.getElementById('exampleModalLabel').innerText = 'Terms of Service';
-                    document.getElementById('closeBtn').innerText = 'Close';
                     document.getElementById('confirmBtn').innerText = 'I Understand';
                     document.getElementById('st_btn').innerText = 'Start';
                     document.getElementById('text1').innerText = 'Dyslexia Treatment Program';
@@ -276,7 +253,6 @@
                 } else if (lang === 'ko') {
                     showContent('termsKorean');
                     document.getElementById('exampleModalLabel').innerText = '이용약관';
-                    document.getElementById('closeBtn').innerText = '닫기';
                     document.getElementById('confirmBtn').innerText = '이해했습니다.';
                     document.getElementById('st_btn').innerText = '시작하기';
                     document.getElementById('text1').innerText = '난독 치료 프로그램';
@@ -288,7 +264,6 @@
                 } else if (lang === 'zh') {
                     showContent('termsChinese');
                     document.getElementById('exampleModalLabel').innerText = '服务条款';
-                    document.getElementById('closeBtn').innerText = '关闭';
                     document.getElementById('confirmBtn').innerText = '我明白了';
                     document.getElementById('st_btn').innerText = '入门';
                     document.getElementById('text1').innerText = '阅读障碍治疗计划';
@@ -300,7 +275,6 @@
                 } else if (lang === 'vi') {
                     showContent('termsVietnamese');
                     document.getElementById('exampleModalLabel').innerText = 'Điều khoản sử dụng';
-                    document.getElementById('closeBtn').innerText = 'Đóng';
                     document.getElementById('confirmBtn').innerText = 'Tôi đã hiểu';
                     document.getElementById('st_btn').innerText = 'Bắt đầu';
                     document.getElementById('text1').innerText = 'Chương trình điều trị chứng khó đọc';
