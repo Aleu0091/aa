@@ -3,20 +3,277 @@
     <head>
         <meta charset="UTF-8" />
         <title>과제 목록</title>
-        <link rel="stylesheet" href="styles.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
     </head>
-    <body>
-        <div class="navbar">
-            <a href="https://www.poayl.xyz/" class="logo"><img src="logo.png" alt="Logo" /></a>
-            <div class="navbar-links">
-                <a href="/study">과제</a>
-                <a href="/login">로그인</a>
+
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a
+                href="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+            >
+                <span class="fs-4">Poayl</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Study</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">로그인</a></li>
+                <a
+                    class="btn btn-primary"
+                    data-bs-toggle="collapse"
+                    href="/register.html"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                >
+                    가입하기
+                </a>
+                <!--
+                <div class="btn-group">
+                    <button
+                        type="button"
+                        class="btn btn-primary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        My
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Setting</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <a class="dropdown-item" href="#"><p class="text-danger">Logout</p></a>
+                        </li>
+                    </ul>
+                </div>
+                -->
+            </ul>
+        </header>
+    </div>
+
+    <br />
+    <br />
+    <div class="container my-5">
+        <div class="bg-body-tertiary p-5 rounded">
+            <div class="col-sm-8 py-5 mx-auto">
+                <h1 id="text1" class="display-5 fw-normal">난독 치료 프로그램</h1>
+                <p id="text2" class="fs-5">이 프로그램은 공익을 위한 프로그램으로 개발 되어 100% 무료로 제공됩니다.</p>
+                
+                    <a id = "text3">시작을 하면</a>
+                    <a id = "text4" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="mx-1">이용약관</a>
+                    <a id = "text5">에 동의한 것으로 간주됩니다.</a>
+                </p>
+                <p>
+                    <a id="st_btn" class="btn btn-primary" href="/docs/5.3/components/navbar/#offcanvas" role="button"
+                        >시작하기</a
+                    >
+                </p>
             </div>
         </div>
-        <div class="button-container">
-            <a href="/study"><button class="big-button">과제</button></a>
-            <a href="/login.html"><button class="big-button">로그인</button></a>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">이용약관</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="termsEnglish">
+                        Your information will be used for better learning through big data analysis. Also, it will be
+                        safely destroyed automatically 15 days after withdrawal from the site. Department processing
+                        requests for access to personal information: Security department
+                        <br />Collected information: Pronunciation data, Name, Age, IP
+                    </div>
+                    <div id="termsKorean" style="display: none">
+                        회원님의 정보는 회원님의 보다 더좋은 학습을 위해 빅데이터 학습으로 사용됩니다.<br />
+                        또한 사이트 탈퇴시 15일뒤 자동으로 안전하게 파기됩니다.<br />개인정보의 열람청구를 접수·처리하는
+                        부서 : 보안부서
+                        <br />
+                        수집정보 : 발음 데이터 , 이름 , 나이 ,Ip
+                    </div>
+                    <div id="termsChinese" style="display: none">
+                        你的信息将用于通过大数据分析进行更好的学习。 此外，它将在从网站撤销后的15天内自动安全销毁。
+                        处理个人信息访问请求的部门：安全部门
+                        <br />收集信息：发音数据，姓名，年龄，IP
+                    </div>
+                    <div id="termsVietnamese" style="display: none">
+                        Thông tin của bạn sẽ được sử dụng để cải thiện hơn trong việc học thông qua phân tích dữ liệu
+                        lớn. Ngoài ra, nó sẽ được hủy an toàn tự động sau 15 ngày kể từ khi rút khỏi trang web. Bộ phận
+                        xử lý yêu cầu truy cập thông tin cá nhân: Bộ phận an ninh
+                        <br />Thông tin được thu thập: Dữ liệu phát âm, Tên, Tuổi, IP
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeBtn">닫기</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirmBtn">
+                        이해 했습니다.
+                    </button>
+                </div>
+            </div>
         </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <footer class="py-5">
+            <div class="row">
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <p>&copy; 2023 Ryu Minjae. All rights reserved.</p>
+                <div class="dropdown">
+                    <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="languageDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        언어 선택
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko')">한국어</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh')">中文</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('vi')">Tiếng Việt</a></li>
+                        <!-- 기타 언어 항목 추가 -->
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <body>
         <script src="script.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            function changeLanguage(lang) {
+                if (lang === 'en') {
+                    showContent('termsEnglish');
+                    document.getElementById('exampleModalLabel').innerText = 'Terms of Service';
+                    document.getElementById('closeBtn').innerText = 'Close';
+                    document.getElementById('confirmBtn').innerText = 'I Understand';
+                    document.getElementById('st_btn').innerText = 'Start';
+                    document.getElementById('text1').innerText = 'Dyslexia Treatment Program';
+                    document.getElementById('text2').innerText =
+                        'This program was developed as a public interest program and is provided 100% free of charge.';
+                    document.getElementById('text3').innerText = 'You are deemed to have agreed to the ';
+                    document.getElementById('text4').innerText = 'Terms of Use.';
+                    document.getElementById('text5').innerText = '';
+                } else if (lang === 'ko') {
+                    showContent('termsKorean');
+                    document.getElementById('exampleModalLabel').innerText = '이용약관';
+                    document.getElementById('closeBtn').innerText = '닫기';
+                    document.getElementById('confirmBtn').innerText = '이해했습니다.';
+                    document.getElementById('st_btn').innerText = '시작하기';
+                    document.getElementById('text1').innerText = '난독 치료 프로그램';
+                    document.getElementById('text2').innerText = '이 프로그램은 공익을 위한 프로그램으로 개발 되어 100% 무료로 제공됩니다.';
+                    document.getElementById('text3').innerText = '시작을 하면';
+                    document.getElementById('text4').innerText = '이용약관';
+                    document.getElementById('text5').innerText = '에 동의한 것으로 간주됩니다.';
+                } else if (lang === 'zh') {
+                    showContent('termsChinese');
+                    document.getElementById('exampleModalLabel').innerText = '服务条款';
+                    document.getElementById('closeBtn').innerText = '关闭';
+                    document.getElementById('confirmBtn').innerText = '我明白了';
+                    document.getElementById('st_btn').innerText = '入门';
+                    document.getElementById('text1').innerText = '阅读障碍治疗计划';
+                    document.getElementById('text2').innerText = '该计划是作为一项公益计划而开发的，并且 100% 免费提供。';
+                    document.getElementById('text3').innerText = '开始即表示您同意我们的';
+                    document.getElementById('text4').innerText = '使用条款。';
+                    document.getElementById('text5').innerText = '';
+                } else if (lang === 'vi') {
+                    showContent('termsVietnamese');
+                    document.getElementById('exampleModalLabel').innerText = 'Điều khoản sử dụng';
+                    document.getElementById('closeBtn').innerText = 'Đóng';
+                    document.getElementById('confirmBtn').innerText = 'Tôi đã hiểu';
+                    document.getElementById('st_btn').innerText = 'Bắt đầu';
+                    document.getElementById('text1').innerText = 'Chương trình điều trị chứng khó đọc';
+                    document.getElementById('text2').innerText = 'Chương trình này được phát triển như một chương trình vì lợi ích công cộng và được cung cấp miễn phí 100%.';
+                    document.getElementById('text3').innerText = 'Bằng cách bắt đầu, bạn đồng ý với ';
+                    document.getElementById('text4').innerText = 'Điều khoản sử dụng ';
+                    document.getElementById('text5').innerText = 'của chúng tôi.';
+                }
+            }
+            function showContent(id) {
+                const languages = ['termsEnglish', 'termsKorean', 'termsChinese', 'termsVietnamese'];
+                languages.forEach((language) => {
+                    const content = document.getElementById(language);
+                    if (language === id) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

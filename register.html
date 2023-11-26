@@ -116,27 +116,6 @@
 
                 return true;
             }
-
-            document.getElementById('registerForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                const formData = new FormData(this); // 폼 데이터 가져오기
-                const url = '/register'; // 서버의 회원가입 엔드포인트 주소
-
-                fetch(url, {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data); // 서버 응답 출력
-                        // 원하는 동작 수행 (예: 성공적으로 가입되었다는 메시지를 사용자에게 보여주기)
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                        // 에러 발생 시 처리 로직 추가
-                    });
-            });
         </script>
     </head>
     <body>
