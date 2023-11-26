@@ -11,31 +11,38 @@
         />
         <style>
             /* 모바일에 대한 스타일 */
-            @media (max-width: 767px) {
+            @media (max-width: 800px) {
                 /* 내비게이션 바를 햄버거 버튼으로 변경 */
                 .navbar-toggler {
                     display: block;
                 }
+
                 .navbar-collapse {
                     display: none;
                 }
+
                 .navbar-expand .navbar-collapse {
                     display: none !important;
                 }
+
                 .navbar-toggler-icon {
                     display: block;
                     background-color: black;
                 }
+
                 .navbar-toggler:focus {
                     outline: none;
                 }
+
                 .navbar-collapse.show {
                     display: block;
                 }
+
                 /* 일부 요소를 가로 정렬로 변경 */
                 .nav-item {
                     display: inline-block !important;
                 }
+
                 .nav-link {
                     display: block !important;
                 }
@@ -229,17 +236,7 @@
             </div>
         </footer>
     </div>
-    <button
-        class="navbar-toggler d-lg-none"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-    >
-        <span class="navbar-toggler-icon"></span>
-    </button>
+
     <body>
         <script src="script.js"></script>
         <script
