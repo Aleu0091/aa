@@ -6,14 +6,13 @@ const app = express();
 const session = require('express-session');
 
 const PORT = process.env.PORT || 3000;
-const corsOptions = {
-    origin: 'https://www.poayl.xyz',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true
-};
 
-app.use(cors(corsOptions));
-// Connect to the SQLite database (create if it doesn't exist)
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'https://www.poayl.xyz');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+    next();
+}); // Connect to the SQLite database (create if it doesn't exist)
 const db = new sqlite3.Database('data.db');
 app.use(
     session({
