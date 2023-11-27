@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
     origin: 'https://www.poayl.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
+    credentials: 'include',
     preflightContinue: false,
     optionsSuccessStatus: 204
 };
