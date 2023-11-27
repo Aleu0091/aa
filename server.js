@@ -14,22 +14,6 @@ app.use(function (req, res, next) {
     next();
 }); // Connect to the SQLite database (create if it doesn't exist)
 
-const whitelist = ['http://localhost:3000', 'https://www.poayl.xyz/'];
-
-// ✅ Enable pre-flight requests
-app.options('*', cors());
-
-const corsOptions = {
-    credentials: true,
-    origin: (origin, callback) => {
-        if (whitelist.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
-};
-
 const db = new sqlite3.Database('data.db');
 app.use(
     session({
