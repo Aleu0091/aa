@@ -10,7 +10,6 @@ const corsOptions = {
     origin: 'https://www.poayl.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    withCredentials: true,
     optionsSuccessStatus: 200 // 응답 상태 200으로 설정
 };
 
