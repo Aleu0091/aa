@@ -9,8 +9,7 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
     origin: 'https://www.poayl.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    optionsSuccessStatus: 200 // 응답 상태 200으로 설정
+    credentials: true
 };
 
 app.use(cors(corsOptions));
