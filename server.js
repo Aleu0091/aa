@@ -7,7 +7,7 @@ const session = require('express-session');
 
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
-    origin: 'http://127.0.0.1:5500',
+    origin: 'https://www.poayl.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     preflightContinue: false,
