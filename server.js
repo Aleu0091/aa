@@ -27,7 +27,9 @@ app.use(
 db.serialize(() => {
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, email TEXT, password TEXT)');
 });
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*https://www.poayl.xyz/');
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // 모든 경로에 대해 CORS를 허용하는 간단한 설정
