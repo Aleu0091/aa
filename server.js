@@ -4,16 +4,14 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const app = express();
 const session = require('express-session');
-
+const HOST = '0.0.0.0'; // 원하는 호스트 주소
 const PORT = process.env.PORT || 3000;
+const corsOptions = {
+    origin: 'https://www.poayl.xyz', // 허용할 클라이언트의 주소
+    credentials: true // 쿠키 및 인증 정보를 전달할 것인지 설정
+};
 
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'https://www.poayl.xyz');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-    next();
-}); // Connect to the SQLite database (create if it doesn't exist)
-
+app.use(cors(corsOptions));
 // ✅ Enable pre-flight requests
 app.options('https://www.poayl.xyz', cors());
 
@@ -25,24 +23,14 @@ app.use(
         saveUninitialized: false
     })
 );
-const corsOptions = {
-    origin: 'https://www.poayl.xyz', // 허용할 클라이언트의 주소
-    credentials: true
-};
-
-app.use(cors(corsOptions));
-// Create a table 'users' if it doesn't exist
 db.serialize(() => {
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, email TEXT, password TEXT)');
 });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// 모든 경로에 대해 CORS를 허용하는 간단한 설정
-app.use(cors());
 
 // Signup endpoint
-
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -87,6 +75,7 @@ app.get('/users', (req, res) => {
         }
     });
 });
+
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -111,6 +100,7 @@ app.post('/login', async (req, res) => {
         return res.status(200).json({ message: 'Login successful', userId: row.id });
     });
 });
+
 // 로그아웃 라우트
 app.get('/logout', (req, res) => {
     if (req.session) {
@@ -136,6 +126,6 @@ app.get('/profile', (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
 });
