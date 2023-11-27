@@ -14,6 +14,9 @@ app.use(function (req, res, next) {
     next();
 }); // Connect to the SQLite database (create if it doesn't exist)
 
+// ✅ Enable pre-flight requests
+app.options('https://www.poayl.xyz', cors());
+
 const db = new sqlite3.Database('data.db');
 app.use(
     session({
@@ -27,11 +30,15 @@ app.use(
 db.serialize(() => {
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, email TEXT, password TEXT)');
 });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-}); // 모든 경로에 대해 CORS를 허용하는 간단한 설정
+const corsOptions = {
+    origin: 'https://www.poayl.xyz', // 허용할 클라이언트의 주소
+    credentials: true
+};
+
+app.use(cors(corsOptions)); // 모든 경로에 대해 CORS를 허용하는 간단한 설정
 
 // Signup endpoint
 
