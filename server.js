@@ -1,13 +1,29 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
-const cors = require('cors'); // CORS 모듈 추가
+const cors = require('cors');
 const bcrypt = require('bcrypt');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const session = require('express-session');
 
+const PORT = process.env.PORT || 3000;
+const corsOptions = {
+    origin: 'http://127.0.0.1:5500',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
 // Connect to the SQLite database (create if it doesn't exist)
 const db = new sqlite3.Database('data.db');
-
+app.use(
+    session({
+        secret: 'secret-key', // 실제 프로덕션 환경에서는 보안을 위해 더 복잡한 값 사용
+        resave: false,
+        saveUninitialized: false
+    })
+);
 // Create a table 'users' if it doesn't exist
 db.serialize(() => {
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, email TEXT, password TEXT)');
@@ -82,9 +98,36 @@ app.post('/login', async (req, res) => {
         }
 
         // 로그인 성공
+        req.session.user = row; // 세션에 사용자 정보 저장
+
         return res.status(200).json({ message: 'Login successful', userId: row.id });
     });
 });
+// 로그아웃 라우트
+app.get('/logout', (req, res) => {
+    if (req.session) {
+        req.session.destroy((err) => {
+            if (err) {
+                res.status(500).send('세션 삭제 실패');
+            } else {
+                res.clearCookie('connect.sid'); // 세션 쿠키 삭제
+                res.send('로그아웃 되었습니다.');
+            }
+        });
+    } else {
+        res.status(401).send('로그인되어 있지 않습니다.');
+    }
+});
+
+// 사용자 정보 확인 라우트
+app.get('/profile', (req, res) => {
+    if (req.session.user) {
+        res.json(req.session.user); // 세션에 사용자 정보를 JSON으로 반환
+    } else {
+        res.status(401).json({ error: 'You are not logged in' }); // JSON 형식의 오류 메시지 반환
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
