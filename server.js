@@ -10,10 +10,8 @@ const corsOptions = {
     origin: 'https://www.poayl.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    origin: true,
     preflightContinue: false,
-    optionsSuccessStatus: 204,
-    AccessControlAllowOrigin: true
+    optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
@@ -21,7 +19,7 @@ app.use(cors(corsOptions));
 const db = new sqlite3.Database('data.db');
 app.use(
     session({
-        secret: 'secret-key', // 실제 프로덕션 환경에서는 보안을 위해 더 복잡한 값 사용
+        secret: 'ajdonnnxkanklaoiendjdikdo', // 실제 프로덕션 환경에서는 보안을 위해 더 복잡한 값 사용
         resave: false,
         saveUninitialized: false
     })
