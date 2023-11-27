@@ -49,6 +49,7 @@
             }
         </style>
     </head>
+
     <button
         class="navbar-toggler d-lg-none"
         type="button"
@@ -75,7 +76,14 @@
                     <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Study</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">로그인</a></li>
-                    <a class="btn btn-primary" href="/register.html" role="button">가입하기</a>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal1"
+                    >
+                        가입하기
+                    </button>
                 </ul>
             </nav>
 
@@ -101,6 +109,50 @@
                 </ul>
             </nav>
         </header>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">회원 가입</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">사용자명</label>
+                            <input type="text" class="form-control" id="username" name="username" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" class="form-control" id="email" name="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" id="password" name="password" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">비밀번호 확인</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                required
+                            />
+                            <span id="error" class="text-danger" style="display: none"
+                                >비밀번호가 일치하지 않습니다.</span
+                            >
+                        </div>
+                        <button type="submit" class="btn btn-primary">회원 가입</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <!-- 추가하고 싶은 다른 버튼들 -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <br />
@@ -304,6 +356,62 @@
                     navbarCollapse.classList.toggle('show');
                 });
             });
+            // 비밀번호 일치 여부 확인 함수
+            function checkPassword() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const errorSpan = document.getElementById('error');
+
+                if (password !== confirmPassword) {
+                    errorSpan.style.display = 'block';
+                    return false;
+                } else {
+                    errorSpan.style.display = 'none';
+                    return true;
+                }
+            }
+
+            // 비밀번호 일치 여부 확인 및 오류 메시지 처리
+            document.addEventListener('DOMContentLoaded', function () {
+                // DOMContentLoaded 이벤트 처리
+            });
+
+            document.getElementById('signupForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                const passwordMatch = checkPassword();
+
+                if (!passwordMatch) {
+                    resetSignupForm();
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username, email, password })
+                    });
+                    console.log(response);
+                    const data = await response.json();
+                    alert(data.message); // 서버로부터의 응답 메시지 표시
+                } catch (error) {
+                    console.error('에러:', error);
+                    alert('회원가입에 실패했습니다.');
+                }
+            });
+
+            // 회원가입 양식 초기화 함수
+            function resetSignupForm() {
+                document.getElementById('error').style.display = 'block';
+            }
         </script>
     </body>
 </html>
