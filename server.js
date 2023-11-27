@@ -10,6 +10,7 @@ const corsOptions = {
     origin: 'https://www.poayl.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
+    origin: true,
     preflightContinue: false,
     optionsSuccessStatus: 204,
     AccessControlAllowOrigin: true
