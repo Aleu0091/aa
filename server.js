@@ -9,8 +9,9 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
     origin: 'https://www.poayl.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: 'omit',
-    withCredentials: true
+    credentials: true,
+    withCredentials: true,
+    optionsSuccessStatus: 200 // 응답 상태 200으로 설정
 };
 
 app.use(cors(corsOptions));
@@ -23,6 +24,7 @@ app.use(
         saveUninitialized: false
     })
 );
+
 // Create a table 'users' if it doesn't exist
 db.serialize(() => {
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, email TEXT, password TEXT)');
