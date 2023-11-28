@@ -1,131 +1,124 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const app = express();
+const { MongoClient } = require('mongodb');
 const session = require('express-session');
-const HOST = '0.0.0.0'; // 원하는 호스트 주소
+
+const app = express();
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
-    origin: 'https://www.poayl.xyz', // 허용할 클라이언트의 주소
-    credentials: true // 쿠키 및 인증 정보를 전달할 것인지 설정
+    origin: 'https://www.poayl.xyz',
+    credentials: true
 };
 
 app.use(cors(corsOptions));
-// ✅ Enable pre-flight requests
-app.options('https://www.poayl.xyz', cors());
+app.options('www.poayl.xyz', cors());
 
-const db = new sqlite3.Database('data.db');
+const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority';
+const client = new MongoClient(uri);
+
+let usersCollection;
+
+async function connectToMongo() {
+    try {
+        await client.connect();
+        const database = client.db('yourDatabaseName');
+        usersCollection = database.collection('users');
+    } catch (err) {
+        console.error('Error connecting to MongoDB:', err);
+    }
+}
+
+connectToMongo();
+
 app.use(
     session({
-        secret: 'ajdonnnxkanklaoiendjdikdo', // 실제 프로덕션 환경에서는 보안을 위해 더 복잡한 값 사용
+        secret: 'ajdonnnxkanklaoiendjdikdo',
         resave: false,
         saveUninitialized: false
     })
 );
-db.serialize(() => {
-    db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, email TEXT, password TEXT)');
-});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Signup endpoint
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
 
-    // 이메일 중복 확인
-    db.get('SELECT * FROM users WHERE email = ?', [email], async (err, row) => {
-        if (err) {
-            return res.status(500).json({ message: 'Database error' });
-        }
-        if (row) {
-            return res.status(409).json({ message: 'Email already exists' });
-        }
+    const existingUser = await usersCollection.findOne({ email });
+    if (existingUser) {
+        return res.status(409).json({ message: 'Email already exists' });
+    }
 
-        try {
-            // 비밀번호 해싱
-            const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-            // 해싱된 비밀번호를 데이터베이스에 저장
-            db.run(
-                'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-                [username, email, hashedPassword],
-                function (err) {
-                    if (err) {
-                        res.status(500).json({ message: 'Failed to register user' });
-                    } else {
-                        res.status(201).json({ message: '가입 성공!', userId: this.lastID });
-                    }
-                }
-            );
-        } catch (err) {
-            res.status(500).json({ message: 'Error during registration' });
-        }
-    });
+        const newUser = {
+            username,
+            email,
+            password: hashedPassword
+        };
+
+        const result = await usersCollection.insertOne(newUser);
+        res.status(201).json({ message: 'Registration successful', userId: result.insertedId });
+    } catch (err) {
+        res.status(500).json({ message: 'Error during registration' });
+    }
 });
 
-// Endpoint to get all users from the database (for testing)
-app.get('/users', (req, res) => {
-    db.all('SELECT * FROM users', (err, rows) => {
-        if (err) {
-            res.status(500).json({ message: 'Database error' });
-        } else {
-            res.json(rows);
-        }
-    });
+app.get('/users', async (req, res) => {
+    try {
+        const allUsers = await usersCollection.find().toArray();
+        res.json(allUsers);
+    } catch (err) {
+        res.status(500).json({ message: 'Database error' });
+    }
 });
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    // 사용자 이메일로 데이터베이스에서 사용자 찾기
-    db.get('SELECT * FROM users WHERE email = ?', [email], async (err, row) => {
-        if (err) {
-            return res.status(500).json({ message: 'Database error' });
-        }
-        if (!row) {
+    try {
+        const user = await usersCollection.findOne({ email });
+        if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // 비밀번호 검증
-        const passwordMatch = await bcrypt.compare(password, row.password);
+        const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid password' });
         }
 
-        // 로그인 성공
-        req.session.user = row; // 세션에 사용자 정보 저장
-
-        return res.status(200).json({ message: 'Login successful', userId: row.id });
-    });
+        req.session.user = user;
+        res.status(200).json({ message: 'Login successful', userId: user._id });
+    } catch (err) {
+        res.status(500).json({ message: 'Database error' });
+    }
 });
 
-// 로그아웃 라우트
 app.get('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy((err) => {
             if (err) {
-                res.status(500).send('세션 삭제 실패');
+                res.status(500).send('Failed to log out');
             } else {
-                res.clearCookie('connect.sid'); // 세션 쿠키 삭제
-                res.send('로그아웃 되었습니다.');
+                res.clearCookie('connect.sid');
+                res.send('Logged out successfully');
             }
         });
     } else {
-        res.status(401).send('로그인되어 있지 않습니다.');
+        res.status(401).send('Not logged in');
     }
 });
 
-// 사용자 정보 확인 라우트
 app.get('/profile', (req, res) => {
     if (req.session.user) {
-        res.json(req.session.user); // 세션에 사용자 정보를 JSON으로 반환
+        res.json(req.session.user);
     } else {
-        res.status(401).json({ error: 'You are not logged in' }); // JSON 형식의 오류 메시지 반환
+        res.status(401).json({ error: 'You are not logged in' });
     }
 });
 
-app.listen(PORT, HOST, () => {
-    console.log(`Server is running on http://${HOST}:${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
