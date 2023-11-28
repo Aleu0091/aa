@@ -85,7 +85,12 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         });
 
         const data = await response.json();
-        alert(data.message);
+        const toastLiveExample = document.getElementById('liveToast');
+        document.getElementById('liveToast').innerText = data.message;
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show();
+        });
     } catch (error) {
         console.error('Error:', error);
     }

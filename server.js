@@ -14,7 +14,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('www.poayl.xyz', cors());
 
-const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority'; // 여기에 MongoDB 연결 문자열을 넣어주세요
 const client = new MongoClient(uri);
 
 let usersCollection;
@@ -22,7 +22,7 @@ let usersCollection;
 async function connectToMongo() {
     try {
         await client.connect();
-        const database = client.db('yourDatabaseName');
+        const database = client.db('test');
         usersCollection = database.collection('users');
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
@@ -63,15 +63,6 @@ app.post('/signup', async (req, res) => {
         res.status(201).json({ message: 'Registration successful', userId: result.insertedId });
     } catch (err) {
         res.status(500).json({ message: 'Error during registration' });
-    }
-});
-
-app.get('/users', async (req, res) => {
-    try {
-        const allUsers = await usersCollection.find().toArray();
-        res.json(allUsers);
-    } catch (err) {
-        res.status(500).json({ message: 'Database error' });
     }
 });
 
