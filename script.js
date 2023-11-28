@@ -86,11 +86,9 @@ document.getElementById('signupForm').addEventListener('submit', async function 
 
         const data = await response.json();
         const toastLiveExample = document.getElementById('liveToast');
-        document.getElementById('liveToast').innerText = data.message;
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-        toastTrigger.addEventListener('click', () => {
-            toastBootstrap.show();
-        });
+        toastBootstrap.show();
+        document.getElementById('liveToast').innerText = data.message;
     } catch (error) {
         console.error('Error:', error);
     }
