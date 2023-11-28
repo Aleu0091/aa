@@ -27,8 +27,7 @@ function changeLanguage(lang) {
         document.getElementById('confirmBtn').innerText = '我明白了';
         document.getElementById('st_btn').innerText = '入门';
         document.getElementById('text1').innerText = '阅读障碍治疗计划';
-        document.getElementById('text2').innerText =
-            '该计划是作为一项公益计划而开发的，并且 100% 免费提供。';
+        document.getElementById('text2').innerText = '该计划是作为一项公益计划而开发的，并且 100% 免费提供。';
         document.getElementById('text3').innerText = '开始即表示您同意我们的';
         document.getElementById('text4').innerText = '使用条款。';
         document.getElementById('text5').innerText = '';
@@ -65,41 +64,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 // 비밀번호 일치 여부 확인 함수
-function checkPassword() {
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const errorSpan = document.getElementById('error');
-
-    if (password !== confirmPassword) {
-        errorSpan.style.display = 'block';
-        return false;
-    } else {
-        errorSpan.style.display = 'none';
-        return true;
-    }
-}
 
 // 비밀번호 일치 여부 확인 및 오류 메시지 처리
-document.addEventListener('DOMContentLoaded', function () {
-    // DOMContentLoaded 이벤트 처리
-});
+
+// 회원가입 폼 제출 시
 document.getElementById('signupForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const formData = new FormData(this);
-    const userData = {
-        username: formData.get('username'),
-        email: formData.get('email'),
-        password: formData.get('password')
-    };
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://www.poayl.xyz/signup', {
+        const response = await fetch('http://localhost:3000/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({ username, email, password })
         });
 
         const data = await response.json();
@@ -108,25 +90,21 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         console.error('Error:', error);
     }
 });
-function resetSignupForm() {
-    document.getElementById('error').style.display = 'block';
-}
-document.getElementById('loginform').addEventListener('submit', async function (e) {
+
+// 로그인 폼 제출 시
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const formData = new FormData(this);
-    const userData = {
-        email: formData.get('email'),
-        password: formData.get('password')
-    };
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://www.poayl.xyz/login', {
+        const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({ email, password })
         });
 
         const data = await response.json();
@@ -135,33 +113,6 @@ document.getElementById('loginform').addEventListener('submit', async function (
         console.error('Error:', error);
     }
 });
-// 클라이언트 사이드의 로그아웃 버튼 이벤트 처리
-document.getElementById('logoutBtn').addEventListener('click', async function () {
-    try {
-        const response = await fetch('https://www.poayl.xyz/logout', {
-            method: 'GET',
-            credentials: 'include'
-        });
-
-        if (response.ok) {
-            alert('로그아웃 되었습니다.');
-        } else {
-            alert('로그아웃 실패');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
-
-async function getUserInfo() {
-    const response = await fetch('https://www.poayl.xyz/profile');
-    const data = await response.json();
-    let strq = JSON.stringify(data).toString();
-    let removedComma = strq.replace('{"error":"', '');
-    let asdfg = removedComma;
-    let removedComma1 = asdfg.replace('"}', '');
-    document.getElementById('username').innerHTML = removedComma1;
-}
 
 // 페이지 로드 시 사용자 정보 확인
 window.onload = getUserInfo;
