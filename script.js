@@ -85,7 +85,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         });
 
         const data = await response.json();
-        alert(data.m);
+        alert(data.message);
     } catch (error) {
         console.error('Error:', error);
     }
