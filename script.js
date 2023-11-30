@@ -76,7 +76,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://info.loca.lt/signup', {
+        const response = await fetch('https://warm-dodo-69.loca.lt/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://info.loca.lt/login', {
+        const response = await fetch('https://warm-dodo-69.loca.lt/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

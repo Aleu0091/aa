@@ -13,15 +13,7 @@ const corsOptions = {
     origin: 'https://www.poayl.xyz',
     credentials: true
 };
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: ["'self'"],
-            fontSrc: ["'self'", 'info.loca.lt'] // 이 부분에 폰트가 호스팅되는 도메인을 추가하세요.
-            // 다른 필요한 정책들도 추가 가능합니다.
-        }
-    })
-);
+
 app.use(cors(corsOptions));
 
 const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority'; // 여기에 MongoDB 연결 문자열을 넣어주세요
