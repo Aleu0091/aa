@@ -99,7 +99,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://tidy-gifts-share.loca.lt/login', {
+        const response = await fetch(' https://tidy-gifts-share.loca.lt/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
