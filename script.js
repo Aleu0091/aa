@@ -76,7 +76,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://warm-dodo-69.loca.lt/signup', {
+        const response = await fetch('https://quick-dog-36.loca.lt/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -86,9 +86,6 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         const btnClose = document.querySelector('.btn-close');
         const data = await response.json();
         alert(data.message);
-        if (data.message === 'Registration successful') {
-            btnClose.click();
-        }
     } catch (error) {
         console.error('Error:', error);
     }
@@ -102,7 +99,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://warm-dodo-69.loca.lt/login', {
+        const response = await fetch('https://quick-dog-36.loca.lt/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
