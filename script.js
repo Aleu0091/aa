@@ -76,7 +76,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://quick-dog-36.loca.lt/signup', {
+        const response = await fetch('https://cyan-insects-sink.loca.lt/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://quick-dog-36.loca.lt/login', {
+        const response = await fetch('https://cyan-insects-sink.loca.lt/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
