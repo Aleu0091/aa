@@ -76,7 +76,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://123.212.234.141:8080/signup', {
+        const response = await fetch('https://khaki-papayas-buy.loca.lt/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://123.212.234.141:8080/login', {
+        const response = await fetch('https://khaki-papayas-buy.loca.lt/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

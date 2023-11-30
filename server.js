@@ -113,6 +113,6 @@ app.get('/profile', (req, res) => {
 });
 
 // 서버 시작 (특정 IP 주소와 포트로 설정)
-app.listen(PORT, '123.212.234.141', () => {
-    console.log(`Server is running at http://123.212.234.141:${PORT}`);
+app.listen(8080, () => {
+    console.log(`Server is running at localhost:8080`);
 });
