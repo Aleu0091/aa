@@ -83,7 +83,6 @@ document.getElementById('signupForm').addEventListener('submit', async function 
             },
             body: JSON.stringify({ username, email, password })
         });
-        const btnClose = document.querySelector('.btn-close');
         const data = await response.json();
         alert(data.message);
     } catch (error) {
