@@ -3,6 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { MongoClient } = require('mongodb');
 const session = require('express-session');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
