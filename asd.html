@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>난독 공부 웹사이트</title>
+        <style>
+            /* CSS 코드 */
+            /* 여기에 스타일을 추가하세요 */
+        </style>
+    </head>
+    <body>
+        <h1>난독 공부 웹사이트</h1>
+        <textarea id="inputText" placeholder="텍스트를 입력하세요..."></textarea>
+        <button onclick="scrambleText()">난독화</button>
+        <div id="outputText"></div>
+
+        <script>
+            // JavaScript 코드
+            function scrambleText() {
+                const inputText = document.getElementById('inputText').value;
+                const outputText = document.getElementById('outputText');
+
+                // 입력 받은 텍스트를 공백을 기준으로 단어 배열로 분리
+                const words = inputText.split(' ');
+
+                // 단어 배열을 무작위로 섞기
+                const shuffledWords = shuffleArray(words);
+
+                // 무작위로 섞인 단어 배열을 다시 문장으로 조합
+                const scrambledText = shuffledWords.join(' ');
+
+                // 난독화된 텍스트를 outputText에 출력
+                outputText.innerText = scrambledText;
+            }
+
+            // 배열을 무작위로 섞는 함수
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+        </script>
+    </body>
+</html>
