@@ -1,4 +1,5 @@
 function changeLanguage(lang) {
+    document.getElementById('logoutBtn').style.display = 'none';
     if (lang === 'en') {
         showContent('termsEnglish');
         document.getElementById('exampleModalLabel').innerText = 'Terms of Service';

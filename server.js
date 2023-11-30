@@ -83,6 +83,8 @@ app.post('/login', async (req, res) => {
         }
 
         req.session.user = user;
+        document.getElementById('logoutBtn').style.display = 'block';
+        document.getElementById('login-btn').style.display = 'none';
         return res.status(200).json({ message: '로그인 성공', userId: user._id });
     } catch (err) {
         return res.status(500).json({ message: 'Database error' });
@@ -113,6 +115,6 @@ app.get('/profile', (req, res) => {
 });
 
 // 서버 시작 (특정 IP 주소와 포트로 설정)
-app.listen(8080, () => {
-    console.log(`Server is running at localhost:8080`);
+app.listen(8000, () => {
+    console.log(`Server is running at localhost:8000`);
 });
