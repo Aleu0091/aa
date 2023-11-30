@@ -14,7 +14,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('www.poayl.xyz', cors());
 
 const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority'; // 여기에 MongoDB 연결 문자열을 넣어주세요
 const client = new MongoClient(uri);
