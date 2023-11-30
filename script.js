@@ -77,7 +77,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://76ca-123-212-234-141.ngrok-free.app/signup', {
+        const response = await fetch('https://d055-123-212-234-141.ngrok-free.app/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://76ca-123-212-234-141.ngrok-free.app/login', {
+        const response = await fetch('https://d055-123-212-234-141.ngrok-free.app/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
