@@ -83,9 +83,12 @@ document.getElementById('signupForm').addEventListener('submit', async function 
             },
             body: JSON.stringify({ username, email, password })
         });
-
+        const btnClose = document.querySelector('.btn-close');
         const data = await response.json();
         alert(data.message);
+        if (data.message === 'Registration successful') {
+            btnClose.click();
+        }
     } catch (error) {
         console.error('Error:', error);
     }
