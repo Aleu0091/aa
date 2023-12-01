@@ -57,7 +57,7 @@ app.post('/signup', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = {
-            username,
+            username: username,
             email,
             password: hashedPassword
         };
@@ -91,7 +91,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy((err) => {
             if (err) {
@@ -106,7 +106,7 @@ app.get('/logout', (req, res) => {
     }
 });
 
-app.get('/profile', (req, res) => {
+app.post('/profile', (req, res) => {
     if (req.session.user) {
         res.json(req.session.user);
     } else {
