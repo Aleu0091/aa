@@ -118,10 +118,6 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         console.error('Error:', error);
     }
 });
-
-// 페이지 로드 시 사용자 정보 확인
-window.onload = getUserInfo;
-
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
         const response = await fetch(url + '/logout', {
@@ -140,3 +136,6 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
         console.error('네트워크 오류:', error);
     }
 });
+
+// 페이지 로드 시 사용자 정보 확인
+window.onload = getUserInfo;
