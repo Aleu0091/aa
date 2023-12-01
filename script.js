@@ -88,6 +88,18 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             document.getElementById('login-btn').style.display = 'none';
             document.getElementById('signup-btn').style.display = 'none';
         }
+        const lc = document.getElementById('login_close');
+        lc.addEventListener('click', async () => {
+            try {
+                // 클릭 이벤트를 생성하고 버튼에 전달
+                const clickEvent = new Event('click');
+                lc.dispatchEvent(clickEvent);
+
+                // 원하는 작업 수행
+            } catch (error) {
+                console.error('에러:', error);
+            }
+        });
     } catch (error) {
         console.error('Error:', error);
     }
