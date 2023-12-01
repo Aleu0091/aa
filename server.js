@@ -3,8 +3,6 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { MongoClient, ObjectId } = require('mongodb');
 const session = require('express-session');
-const multer = require('multer');
-
 const app = express();
 const corsOptions = {
     origin: 'https://www.poayl.xyz',
@@ -12,7 +10,11 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://www.poayl.xyz/'); // 모든 출처 허용 ('*'는 모든 출처를 의미)
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
