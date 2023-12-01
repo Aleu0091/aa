@@ -44,6 +44,27 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const existingUser = await usersCollection.findOne({ email });
+        if (!existingUser) {
+            return res.status(404).json({ message: '유저를 찾을 수 없음' });
+        }
+
+        const passwordMatch = await bcrypt.compare(password, existingUser.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ message: '이메일 또는 패스워드 에러' });
+        }
+
+        req.session.user = existingUser;
+
+        return res.status(200).json({ message: '로그인 성공', userId: existingUser._id });
+    } catch (err) {
+        return res.status(500).json({ message: 'Database error' });
+    }
+});
 
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
@@ -66,30 +87,6 @@ app.post('/signup', async (req, res) => {
         res.status(201).json({ message: '가입 성공', userId: result.insertedId });
     } catch (err) {
         res.status(500).json({ message: '가입중 오류' });
-    }
-});
-
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const existingUser = await usersCollection.findOne({ email });
-        if (existingUser) {
-            res.status(409).json({ message: '이미 가입된 이메일 입니다.' });
-        } else {
-            return res.status(404).json({ message: '유저를 찾을 수 없음' });
-        }
-
-        const passwordMatch = await bcrypt.compare(password, user.password);
-        if (!passwordMatch) {
-            return res.status(401).json({ message: '이메일 또는 패스워드 에러' });
-        }
-
-        req.session.user = user;
-
-        return res.status(200).json({ message: '로그인 성공', userId: user._id });
-    } catch (err) {
-        return res.status(500).json({ message: 'Database error' });
     }
 });
 
