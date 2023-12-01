@@ -66,7 +66,32 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // 비밀번호 일치 여부 확인 함수
 const url = 'https://4351-123-212-234-141.ngrok-free.app';
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch(url + '/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        alert(data.message);
+        if (data.message === '로그인 성공') {
+            document.getElementById('logoutBtn').style.display = 'flex';
+            document.getElementById('login-btn').style.display = 'none';
+            document.getElementById('singup-btn').style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
 // 비밀번호 일치 여부 확인 및 오류 메시지 처리
 // 회원가입 폼 제출 시
 document.getElementById('signupForm').addEventListener('submit', async function (e) {
@@ -92,32 +117,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
 });
 
 // 로그인 폼 제출 시
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        const response = await fetch(url + '/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, email, password })
-        });
-
-        const data = await response.json();
-        alert(data.message);
-        if (data.message === '로그인 성공') {
-            document.getElementById('logoutBtn').style.display = 'flex';
-            document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('singup-btn').style.display = 'none';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
         const response = await fetch(url + '/logout', {
