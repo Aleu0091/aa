@@ -124,7 +124,7 @@ window.onload = getUserInfo;
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
-        const response = await fetch('/logout', {
+        const response = await fetch(url + '/logout', {
             method: 'POST',
             credentials: 'same-origin' // 세션 정보를 전달하기 위해 credentials 설정
         });
