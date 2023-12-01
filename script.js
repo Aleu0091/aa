@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 // 비밀번호 일치 여부 확인 함수
+const url = 'https://3b71-123-212-234-141.ngrok-free.app';
 
 // 비밀번호 일치 여부 확인 및 오류 메시지 처리
-
 // 회원가입 폼 제출 시
 document.getElementById('signupForm').addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -77,7 +77,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://d055-123-212-234-141.ngrok-free.app/signup', {
+        const response = await fetch(url + '/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://d055-123-212-234-141.ngrok-free.app/login', {
+        const response = await fetch(url + '/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -109,6 +109,11 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
         const data = await response.json();
         alert(data.message);
+        if (data.message === '로그인 성공') {
+            document.getElementById('logoutBtn').style.display = 'flex';
+            document.getElementById('login-btn').style.display = 'none';
+            document.getElementById('singup-btn').style.display = 'none';
+        }
     } catch (error) {
         console.error('Error:', error);
     }

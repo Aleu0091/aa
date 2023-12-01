@@ -83,8 +83,7 @@ app.post('/login', async (req, res) => {
         }
 
         req.session.user = user;
-        document.getElementById('logoutBtn').style.display = 'block';
-        document.getElementById('login-btn').style.display = 'none';
+
         return res.status(200).json({ message: '로그인 성공', userId: user._id });
     } catch (err) {
         return res.status(500).json({ message: 'Database error' });
