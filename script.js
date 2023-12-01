@@ -86,7 +86,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         if (data.message === '로그인 성공') {
             document.getElementById('logoutBtn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('singup-btn').style.display = 'none';
+            document.getElementById('signup-btn').style.display = 'none';
         }
     } catch (error) {
         console.error('Error:', error);
