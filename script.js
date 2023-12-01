@@ -123,6 +123,18 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         });
         const data = await response.json();
         alert(data.message);
+        const sc = document.getElementById('signup_close');
+        sc.addEventListener('click', async () => {
+            try {
+                // 클릭 이벤트를 생성하고 버튼에 전달
+                const clickEvent = new Event('click');
+                sc.dispatchEvent(clickEvent);
+
+                // 원하는 작업 수행
+            } catch (error) {
+                console.error('에러:', error);
+            }
+        });
     } catch (error) {
         console.error('Error:', error);
     }
