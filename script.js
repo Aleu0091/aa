@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 // 비밀번호 일치 여부 확인 함수
-let url = 'https://08ec-123-212-234-141.ngrok-free.app';
+let url = 'https://d939-123-212-234-141.ngrok-free.app/';
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -73,7 +73,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch(url + '/login', {
+        const response = await fetch(url + 'login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +120,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
-        const response = await fetch(url + '/logout', {
+        const response = await fetch(url + 'logout', {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
