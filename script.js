@@ -69,8 +69,8 @@ const url = 'https://4351-123-212-234-141.ngrok-free.app';
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById('email1').value;
-    const password = document.getElementById('password1').value;
+    const email1 = document.getElementById('email1').value;
+    const password1 = document.getElementById('password1').value;
 
     try {
         const response = await fetch(url + '/login', {
@@ -78,7 +78,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email1, password1 })
         });
 
         const data = await response.json();
