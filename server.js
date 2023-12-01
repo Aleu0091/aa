@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const session = require('express-session');
 const app = express();
 const corsOptions = {
@@ -44,6 +44,7 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
