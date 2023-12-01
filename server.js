@@ -17,14 +17,12 @@ const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net
 const client = new MongoClient(uri);
 
 let usersCollection;
-let coursesCollection;
 
 async function connectToMongo() {
     try {
         await client.connect();
         const database = client.db('test');
         usersCollection = database.collection('users');
-        coursesCollection = database.collection('courses');
         console.log('Connected to MongoDB');
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
