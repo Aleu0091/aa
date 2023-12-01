@@ -137,24 +137,21 @@ $(document).ready(function () {
         $('#exampleModal2').modal('show'); // Open exampleModal2
     });
 });
-document.getElementsByClassName('navbar navbar-expand-md').addEventListener('logoutBtn', async function (e) {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
+document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
-        const response = await fetch(url + '/logout', {
+        const response = await fetch('/logout', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, email, password })
+            credentials: 'same-origin' // 세션 정보를 전달하기 위해 credentials 설정
         });
-        const data = await response.json();
-        alert(data.message);
+
+        if (response.ok) {
+            console.log('로그아웃 성공');
+            // 로그아웃 후 원하는 동작 수행 (예: 홈페이지로 리다이렉트)
+            window.location.href = '/';
+        } else {
+            console.error('로그아웃 실패');
+        }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('네트워크 오류:', error);
     }
 });
