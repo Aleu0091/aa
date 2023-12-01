@@ -141,4 +141,3 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 });
 
 // 페이지 로드 시 사용자 정보 확인
-window.onload = getUserInfo;

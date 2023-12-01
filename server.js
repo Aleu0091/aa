@@ -46,15 +46,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { email: loginEmail, password: loginPassword } = req.body;
 
     try {
-        const existingUser = await usersCollection.findOne({ email });
+        const existingUser = await usersCollection.findOne({ email: loginEmail });
         if (!existingUser) {
             return res.status(404).json({ message: '유저를 찾을 수 없음' });
         }
 
-        const passwordMatch = await bcrypt.compare(password, existingUser.password);
+        const passwordMatch = await bcrypt.compare(loginPassword, existingUser.password);
         if (!passwordMatch) {
             return res.status(401).json({ message: '이메일 또는 패스워드 에러' });
         }
@@ -68,19 +68,19 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username: signupUsername, email: signupEmail, password: signupPassword } = req.body;
 
-    const existingUser = await usersCollection.findOne({ email });
+    const existingUser = await usersCollection.findOne({ email: signupEmail });
     if (existingUser) {
         return res.status(409).json({ message: '이미 가입된 이메일 입니다.' });
     }
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(signupPassword, 10);
 
         const newUser = {
-            username: username,
-            email,
+            username: signupUsername,
+            email: signupEmail,
             password: hashedPassword
         };
 
