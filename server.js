@@ -3,12 +3,9 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { MongoClient } = require('mongodb');
 const session = require('express-session');
-const fs = require('fs');
-const https = require('https');
-const helmet = require('helmet');
+const multer = require('multer');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 const corsOptions = {
     origin: 'https://www.poayl.xyz',
     credentials: true
@@ -16,16 +13,19 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority'; // 여기에 MongoDB 연결 문자열을 넣어주세요
+const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
 let usersCollection;
+let coursesCollection;
 
 async function connectToMongo() {
     try {
         await client.connect();
         const database = client.db('test');
         usersCollection = database.collection('users');
+        coursesCollection = database.collection('courses');
+        console.log('Connected to MongoDB');
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
     }
@@ -113,7 +113,76 @@ app.get('/profile', (req, res) => {
     }
 });
 
-// 서버 시작 (특정 IP 주소와 포트로 설정)
-app.listen(8000, () => {
-    console.log(`Server is running at localhost:8000`);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Add course endpoint
+app.post('/addCourse', async (req, res) => {
+    const { id, title, description } = req.body;
+
+    try {
+        // MongoDB에 강의 정보를 삽입합니다.
+        const newCourse = { id, title, description };
+        const result = await coursesCollection.insertOne(newCourse);
+
+        if (result.insertedId) {
+            res.status(201).json({ message: '강의 추가 성공', courseId: result.insertedId });
+        } else {
+            res.status(500).json({ message: '강의 추가 중 오류' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Database error' });
+    }
+});
+
+// Course details endpoint
+app.get('/courses/:id', async (req, res) => {
+    const courseId = req.params.id;
+
+    try {
+        // MongoDB에서 해당 ID에 해당하는 강의 데이터를 가져옵니다.
+        const course = await coursesCollection.findOne({ id: Number(courseId) });
+
+        if (!course) {
+            res.status(404).json({ message: 'Course not found' });
+        } else {
+            res.json(course);
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching course data from MongoDB' });
+    }
+});
+
+// File upload and course addition endpoint
+app.post('/courses', upload.single('file'), async (req, res) => {
+    try {
+        const { title, description } = req.body;
+        const file = req.file;
+
+        // MongoDB에 강의 정보 및 파일 정보 저장
+        const result = await coursesCollection.insertOne({
+            title,
+            description,
+            filename: file.originalname,
+            path: file.path
+        });
+
+        res.status(201).json({ message: 'Course added successfully', courseId: result.insertedId });
+    } catch (err) {
+        res.status(500).json({ message: 'Error adding course' });
+    }
+});
+
+// Server setup
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+    console.log(`Server is running at localhost:${port}`);
 });
