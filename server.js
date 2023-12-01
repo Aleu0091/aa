@@ -73,8 +73,10 @@ app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await usersCollection.findOne({ email });
-        if (!user) {
+        const existingUser = await usersCollection.findOne({ email });
+        if (existingUser) {
+            res.status(409).json({ message: '이미 가입된 이메일 입니다.' });
+        } else {
             return res.status(404).json({ message: '유저를 찾을 수 없음' });
         }
 
