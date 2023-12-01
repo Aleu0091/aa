@@ -121,22 +121,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
 // 페이지 로드 시 사용자 정보 확인
 window.onload = getUserInfo;
-const toastTrigger = document.getElementById('liveToastBtn');
-const toastLiveExample = document.getElementById('liveToast');
 
-if (toastTrigger) {
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-    toastTrigger.addEventListener('click', () => {
-        toastBootstrap.show();
-    });
-}
-$(document).ready(function () {
-    $('#switchModal').click(function (e) {
-        e.preventDefault();
-        $('#exampleModal1').modal('hide'); // Close exampleModal1
-        $('#exampleModal2').modal('show'); // Open exampleModal2
-    });
-});
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
         const response = await fetch('/logout', {
