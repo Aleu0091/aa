@@ -87,6 +87,8 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             document.getElementById('logoutBtn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
             document.getElementById('signup-btn').style.display = 'none';
+            const modal = new bootstrap.Modal(document.getElementById('exampleModal2')); // 모달 인스턴스 생성
+            modal.hide(); // 모달 닫기
         }
         const lc = document.getElementById('login_close');
         lc.addEventListener('click', async () => {
@@ -123,18 +125,10 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         });
         const data = await response.json();
         alert(data.message);
-        const sc = document.getElementById('signup_close');
-        sc.addEventListener('click', async () => {
-            try {
-                // 클릭 이벤트를 생성하고 버튼에 전달
-                const clickEvent = new Event('click');
-                sc.dispatchEvent(clickEvent);
-
-                // 원하는 작업 수행
-            } catch (error) {
-                console.error('에러:', error);
-            }
-        });
+        if (data.message === '가입 성공') {
+            const modal = new bootstrap.Modal(document.getElementById('exampleModal1')); // 모달 인스턴스 생성
+            modal.hide();
+        }
     } catch (error) {
         console.error('Error:', error);
     }
