@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 // 비밀번호 일치 여부 확인 함수
-let url = 'https://4351-123-212-234-141.ngrok-free.app';
+let url = 'https://08ec-123-212-234-141.ngrok-free.app';
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
