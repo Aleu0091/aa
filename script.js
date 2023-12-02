@@ -148,16 +148,16 @@ document.getElementById('st_btn').addEventListener('click', async () => {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
-            } // 세션 정보를 전달하기 위해 credentials 설정
+            }
         });
 
         if (response.status === 200) {
-            const userData = await response.json();
-            console.log('사용자 정보:', userData);
-            // 여기서 userData를 활용하여 사용자 정보를 처리
+            const data = await response.json();
+            // 서버로부터 사용자 정보를 받았을 때의 처리
+            console.log('로그인된 사용자:', data);
         } else if (response.status === 401) {
-            alert('로그인 해주세요'); // 로그인되어 있지 않은 경우의 처리
-            // 로그인되어 있지 않은 경우의 처리
+            // 로그인되지 않은 상태일 때의 처리
+            alert('로그인 해주세요');
         }
     } catch (error) {
         console.error('네트워크 오류:', error);
