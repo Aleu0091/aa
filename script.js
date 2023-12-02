@@ -142,7 +142,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 
 document.getElementById('st_btn').addEventListener('click', async () => {
     try {
-        const response = await fetch(url + 'profile', {
+        const response = await fetch(url + 'profileCheck', {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
