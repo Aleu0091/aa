@@ -114,7 +114,7 @@ app.post('/profile', (req, res) => {
     }
 });
 
-// File upload and course addition endpoint
+// File upload and course addition
 
 // Server setup
 const port = process.env.PORT || 8000;
