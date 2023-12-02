@@ -106,7 +106,7 @@ app.post('/logout', (req, res) => {
     }
 });
 
-app.post('/profileCheck', (req, res) => {
+app.post('/profile', (req, res) => {
     if (req.session.user) {
         res.json(req.session.user);
     } else {
