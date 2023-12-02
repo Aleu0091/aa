@@ -149,7 +149,8 @@ document.getElementById('st_btn').addEventListener('click', async () => {
                 'Content-Type': 'application/json'
             } // 세션 정보를 전달하기 위해 credentials 설정
         });
-        console.log(response.message);
+        const data = await response.json();
+        console.log(data.message);
     } catch (error) {
         console.error('네트워크 오류:', error);
     }
