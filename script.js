@@ -140,4 +140,19 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
     }
 });
 
+document.getElementById('st_btn').addEventListener('click', async () => {
+    try {
+        const response = await fetch(url + 'profile', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            } // 세션 정보를 전달하기 위해 credentials 설정
+        });
+        console.log(response.message);
+    } catch (error) {
+        console.error('네트워크 오류:', error);
+    }
+});
+
 // 페이지 로드 시 사용자 정보 확인
