@@ -140,6 +140,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
     }
 });
 
+// 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
     try {
         const response = await fetch(url + 'profileCheck', {
@@ -149,8 +150,16 @@ document.getElementById('st_btn').addEventListener('click', async () => {
                 'Content-Type': 'application/json'
             } // 세션 정보를 전달하기 위해 credentials 설정
         });
-        const data = await response.json();
-        console.log(data.message);
+
+        if (response.status === 200) {
+            const userData = await response.json();
+            console.log('사용자 정보:', userData);
+            // 여기서 userData를 활용하여 사용자 정보를 처리
+        } else if (response.status === 401) {
+            const errorData = await response.json();
+            console.log('오류:', errorData.error);
+            // 로그인되어 있지 않은 경우의 처리
+        }
     } catch (error) {
         console.error('네트워크 오류:', error);
     }
