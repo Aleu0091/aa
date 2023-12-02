@@ -108,9 +108,9 @@ app.post('/logout', (req, res) => {
 
 app.post('/profile', (req, res) => {
     if (req.session) {
-        res.json('login');
+        res.status(200).send('login');
     } else {
-        res.status(401).json('Not logged in');
+        res.status(401).send('Not logged in');
     }
 });
 
