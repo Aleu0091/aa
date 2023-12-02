@@ -107,10 +107,10 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/profile', (req, res) => {
-    if (req.session.user) {
-        res.json(req.session.user);
+    if (req.session) {
+        res.json('login');
     } else {
-        res.status(401).json({ error: 'You are not logged in' });
+        res.status(401).json('Not logged in');
     }
 });
 
