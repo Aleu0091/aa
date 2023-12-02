@@ -156,8 +156,7 @@ document.getElementById('st_btn').addEventListener('click', async () => {
             console.log('사용자 정보:', userData);
             // 여기서 userData를 활용하여 사용자 정보를 처리
         } else if (response.status === 401) {
-            const errorData = await response.json();
-            console.log('오류:', errorData.error);
+            alert('로그인 해주세요'); // 로그인되어 있지 않은 경우의 처리
             // 로그인되어 있지 않은 경우의 처리
         }
     } catch (error) {
