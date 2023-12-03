@@ -122,7 +122,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
-        const response = await fetch(url + '/logout', {
+        const response = await fetch(url + 'logout', {
             method: 'POST',
             credentials: 'include' // 쿠키 전송을 위해 필요
         });
@@ -139,7 +139,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 });
 async function getProfile() {
     try {
-        const response = await fetch('/profile', {
+        const response = await fetch(url + 'profile', {
             method: 'GET',
             credentials: 'include' // 쿠키 전송을 위해 필요
         });
