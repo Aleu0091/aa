@@ -107,7 +107,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/profile', (req, res) => {
-    if (req.session) {
+    if (req.session.email) {
         res.status(200).send('login');
     } else {
         res.status(401).send('Not logged in');

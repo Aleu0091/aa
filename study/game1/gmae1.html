@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>한글 타자</title>
+        <style>
+            #info {
+                float: left;
+                margin-left: 50px;
+                font-size: 30px;
+            }
+            #contents {
+                background-color: #a5d6a7;
+                width: 1200px;
+                height: 800px;
+                margin: 0 auto;
+            }
+            #tajaContents {
+                width: 100%;
+                height: 95%;
+                position: relative;
+            }
+            #inputContents {
+                text-align: center;
+                border-top-style: solid;
+                border-top-color: black;
+                padding-top: 5px;
+            }
+            #inputText {
+                display: inline-block;
+            }
+            #inputBtn {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="info">
+            <div id="score"></div>
+            <div id="life"></div>
+        </div>
+        <div id="contents">
+            <div id="tajaContents"></div>
+            <div id="inputContents">
+                <div id="inputText">
+                    <input type="text" id="tajaText" />
+                </div>
+                <div id="inputBtn">
+                    <button style="display: flex" id="tajaBtn">시작하기</button>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

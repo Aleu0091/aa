@@ -5,31 +5,6 @@ body {
     padding: 0;
 }
 
-.navbar {
-    background-color: white;
-    overflow: hidden;
-    border-bottom: 1px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-.navbar a {
-    color: black;
-    text-decoration: none;
-    padding: 14px 16px;
-}
-
-.navbar a:hover {
-    background-color: #f5f5f5;
-    color: black;
-}
-
-.logo {
-    display: block;
-}
-
 /* 기존 과제 스타일 */
 .task {
     position: relative;
@@ -122,4 +97,41 @@ img.resizeable {
 /* 호버 시 크기 키우기 */
 .big-button:hover {
     transform: scale(1.1);
+}
+/* 모바일에 대한 스타일 */
+@media (max-width: 800px) {
+    /* 내비게이션 바를 햄버거 버튼으로 변경 */
+    .navbar-toggler {
+        display: block;
+    }
+
+    .navbar-collapse {
+        display: none;
+    }
+
+    .navbar-expand .navbar-collapse {
+        display: none !important;
+    }
+
+    .navbar-toggler-icon {
+        display: block;
+        background-color: black;
+    }
+
+    .navbar-toggler:focus {
+        outline: none;
+    }
+
+    .navbar-collapse.show {
+        display: block;
+    }
+
+    /* 일부 요소를 가로 정렬로 변경 */
+    .nav-item {
+        display: inline-block !important;
+    }
+
+    .nav-link {
+        display: block !important;
+    }
 }
