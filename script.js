@@ -141,5 +141,5 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
-    getProfile(); // 프로필 정보를 가져오는 함수 호출
+    window.location.href = '/study.html';
 });
