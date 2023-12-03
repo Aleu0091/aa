@@ -143,7 +143,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
     // 예시: 프로필 정보 요청
-    await fetch(url + '/profile', {
+    await fetch(url + 'profile', {
         method: 'POST',
         credentials: 'include' // 세션 정보를 전송하기 위해 필요
     })
