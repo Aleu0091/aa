@@ -154,6 +154,7 @@ document.getElementById('st_btn').addEventListener('click', async () => {
         if (response.status === 200) {
             // 서버로부터 사용자 정보를 받았을 때의 처리
             alert('로그인된 사용자');
+            href = '/study.html';
         } else if (response.status === 401) {
             // 로그인되지 않은 상태일 때의 처리
             return alert('로그인 해주세요');
