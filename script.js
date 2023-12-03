@@ -143,19 +143,26 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
     // 예시: 프로필 정보 요청
-    await fetch(url + 'profile', {
-        method: 'POST',
-        credentials: 'include' // 세션 정보를 전송하기 위해 필요
+    fetch(url + 'profile', {
+        method: 'GET',
+        credentials: 'include' // 요청 시에 자격 증명(cookie)을 포함
     })
         .then((response) => {
             if (response.status === 200) {
-                alert('로그인됨');
-            } else if (response.status === 401) {
-                alert('로그인이 필요합니다');
+                return response.json();
+            } else {
+                throw new Error('Not logged in');
             }
         })
+        .then((data) => {
+            //로그인 성공
+            const { username } = data;
+            console.log(username);
+            // 여기에서 username을 사용하여 필요한 처리를 수행
+        })
         .catch((error) => {
-            console.error('Error:', error);
+            console.error('Error:', error.message);
+            // 로그인되어 있지 않음을 처리
         });
 });
 
