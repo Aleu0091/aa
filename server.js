@@ -38,13 +38,16 @@ app.use(
     session({
         secret: 'ajdonnnxkanklaoiendjdikdo',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {
+            sameSite: 'None',
+            secure: true
+        }
     })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.post('/login', async (req, res) => {
     const { email: loginEmail, password: loginPassword } = req.body;
 
@@ -59,7 +62,9 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: '이메일 또는 패스워드 에러' });
         }
 
-        req.session.user = existingUser;
+        res.cookie('username', existingUser.username, { sameSite: 'None', secure: true });
+        res.cookie('email', existingUser.email, { sameSite: 'None', secure: true });
+        console.log(res.cookie('username'));
 
         return res.status(200).json({ message: '로그인 성공', userId: existingUser._id });
     } catch (err) {
@@ -92,30 +97,20 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    if (req.session) {
-        req.session.destroy((err) => {
-            if (err) {
-                res.status(500).send('Failed to log out');
-            } else {
-                res.clearCookie('connect.sid');
-                res.send('Logged out successfully');
-            }
-        });
-    } else {
-        res.status(401).send('Not logged in');
-    }
+    // 쿠키를 클리어하여 로그아웃
+    res.clearCookie('username');
+    res.clearCookie('email');
+    res.send('Logged out successfully');
 });
 
 // profile 엔드포인트 수정
 app.get('/profile', (req, res) => {
-    // 세션에 사용자 정보가 있는지 확인
-    if (req.session.user) {
-        // 세션에 저장된 사용자 정보에서 이름 추출
-        const { username } = req.session.user;
-        // JSON 형태로 클라이언트에 전달
-        res.status(200).json({ username });
+    // 쿠키에서 사용자 정보를 가져옴
+    const email = req.cookies ? req.cookies.email : null;
+    console.log(email);
+    if (username) {
+        res.status(200).json({ email });
     } else {
-        // 세션이 없으면 로그인되지 않은 상태로 간주
         res.status(401).send('Not logged in');
     }
 });

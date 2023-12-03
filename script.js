@@ -144,22 +144,16 @@ async function getProfile() {
     try {
         const response = await fetch(url + 'profile', {
             method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            credentials: 'include' // 쿠키 전송을 위해 credentials 설정
         });
-
         if (response.ok) {
             const data = await response.json();
-            console.log('사용자 이름:', data.username);
-            // 특정 동작 수행 (예: 프로필 정보 표시)
-        } else if (response.status === 401) {
-            // 세션이 없는 경우
-            alert('로그인이 필요합니다');
+            console.log('사용자 이메일:', data.email);
+            // 여기에서 필요한 동작 수행 (프로필 정보를 표시하거나 화면을 업데이트하는 등)
         } else {
-            // 다른 오류 처리
-            throw new Error('프로필 정보를 가져오는 중 오류가 발생했습니다.');
+            // 로그인되지 않은 경우
+            alert('로그인이 필요합니다');
+            // 로그인 페이지로 리다이렉트 또는 로그인 팝업 등의 동작 수행
         }
     } catch (error) {
         console.error('프로필 정보 가져오기 에러:', error);
