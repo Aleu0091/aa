@@ -62,9 +62,8 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: '이메일 또는 패스워드 에러' });
         }
 
-        res.cookie('username', existingUser.username, { sameSite: 'None', secure: true });
-        res.cookie('email', existingUser.email, { sameSite: 'None', secure: true });
-        console.log(res.cookie('username'));
+        res.cookie('email', loginEmail, { sameSite: 'None', secure: true });
+        console.log(res.cookie());
 
         return res.status(200).json({ message: '로그인 성공', userId: existingUser._id });
     } catch (err) {
@@ -108,7 +107,7 @@ app.get('/profile', (req, res) => {
     // 쿠키에서 사용자 정보를 가져옴
     const email = req.cookies ? req.cookies.email : null;
     console.log(email);
-    if (username) {
+    if (email) {
         res.status(200).json({ email });
     } else {
         res.status(401).send('Not logged in');
