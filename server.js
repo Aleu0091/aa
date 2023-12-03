@@ -61,9 +61,8 @@ app.post('/login', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: '이메일 또는 패스워드 에러' });
         }
-
-        res.cookie('email', loginEmail, { sameSite: 'None', secure: true });
-        console.log(res.cookie());
+        var expiryDate = new Date(Date.now() + 60 * 60 * 1000 * 24 * 7); // 24 hour 7일
+        res.cookie('email', loginEmail, { expires: expiryDate, httpOnly: true, signed: true });
 
         return res.status(200).json({ message: '로그인 성공', userId: existingUser._id });
     } catch (err) {
@@ -97,17 +96,17 @@ app.post('/signup', async (req, res) => {
 
 app.post('/logout', (req, res) => {
     // 쿠키를 클리어하여 로그아웃
-    res.clearCookie('username');
     res.clearCookie('email');
+    res.redirect('/');
     res.send('Logged out successfully');
 });
 
 // profile 엔드포인트 수정
 app.get('/profile', (req, res) => {
     // 쿠키에서 사용자 정보를 가져옴
-    const email = req.cookies ? req.cookies.email : null;
-    console.log(email);
-    if (email) {
+    var cookieLoginObj = req.signedCookies.email;
+
+    if (cookieLoginObj && cookieLoginObj.email !== '') {
         res.status(200).json({ email });
     } else {
         res.status(401).send('Not logged in');
