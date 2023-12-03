@@ -142,28 +142,20 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
-    fetch(url + 'profile', {
+    // 예시: 프로필 정보 요청
+    await fetch(url + '/profile', {
         method: 'POST',
-        credentials: 'include'
+        credentials: 'include' // 세션 정보를 전송하기 위해 필요
     })
         .then((response) => {
             if (response.status === 200) {
-                return response.json();
+                alert('로그인됨');
             } else if (response.status === 401) {
-                alert('로그인이 필요합니다.'); // 로그인이 되지 않은 경우 알림
-                throw new Error('Not logged in.');
-            } else {
-                throw new Error('Network response was not ok.');
+                alert('로그인이 필요합니다');
             }
         })
-        .then((data) => {
-            // 서버로부터 받은 데이터 처리
-            console.log(data);
-            // 로그인이 확인되었을 때 추가로 작업 가능
-        })
         .catch((error) => {
-            // 오류 처리
-            console.error('There has been a problem with your fetch operation:', error);
+            console.error('Error:', error);
         });
 });
 
