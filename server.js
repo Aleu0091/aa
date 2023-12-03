@@ -13,12 +13,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://www.poayl.xyz'); // 요청한 출처를 허용
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// MongoDB 연결 설정
 const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
@@ -37,9 +35,9 @@ async function connectToMongo() {
 
 connectToMongo();
 
-// Passport 로컬 전략 설정
+// Passport 및 LocalStrategy 설정
 passport.use(
-    new LocalStrategy(async (username, password, done) => {
+    new LocalStrategy({ usernameField: 'email' }, async (username, password, done) => {
         try {
             const existingUser = await usersCollection.findOne({ email: username });
             if (!existingUser) {
@@ -70,6 +68,7 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
+// 세션 설정
 app.use(
     session({
         secret: 'ajdonnnxkanklaoiendjdikdo',
@@ -85,17 +84,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.post(
-    '/login',
-    passport.authenticate('local', {
-        successRedirect: '/profile',
-        failureRedirect: '/login'
-    })
-);
-
+// 회원가입 엔드포인트
 app.post('/signup', async (req, res) => {
     const { username: signupUsername, email: signupEmail, password: signupPassword } = req.body;
 
@@ -120,10 +109,20 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-// profile 엔드포인트 수정
+// 로그인 엔드포인트
+app.post('/login', passport.authenticate('local'), (req, res) => {
+    res.status(200).json({ message: '로그인 성공' });
+});
+
+// 로그아웃 엔드포인트
 app.post('/logout', (req, res) => {
     req.logout();
-    res.send('Logged out successfully');
+    res.status(200).json({ message: '로그아웃 성공' });
+});
+
+// 프로필 엔드포인트
+app.get('/profile', requireLogin, (req, res) => {
+    res.json(req.user);
 });
 
 function requireLogin(req, res, next) {
@@ -134,14 +133,8 @@ function requireLogin(req, res, next) {
     }
 }
 
-app.get('/profile', requireLogin, (req, res) => {
-    res.json(req.session.user);
-});
-
-// File upload and course addition
-
-// Server setup
+// 서버 설정
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-    console.log(`Server is running at localhost:${port}`);
+    console.log(`서버가 localhost:${port}에서 실행 중입니다.`);
 });

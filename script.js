@@ -122,23 +122,19 @@ document.getElementById('signupForm').addEventListener('submit', async function 
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
-        const response = await fetch(url + 'logout', {
+        const response = await fetch('/logout', {
             method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            } // 세션 정보를 전달하기 위해 credentials 설정
+            credentials: 'include' // 쿠키 전송을 위해 필요
         });
 
         if (response.ok) {
             console.log('로그아웃 성공');
-            // 로그아웃 후 원하는 동작 수행 (예: 홈페이지로 리다이렉트)
-            window.location.href = '/';
+            // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
         } else {
             console.error('로그아웃 실패');
         }
     } catch (error) {
-        console.error('네트워크 오류:', error);
+        console.error('네트워크 에러:', error);
     }
 });
 async function getProfile() {
