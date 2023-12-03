@@ -85,9 +85,9 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const data = await response.json();
         alert(data.message);
         if (data.message === '로그인 성공') {
-            document.getElementById('logoutBtn').style.display = 'flex';
+            document.getElementById('user-btn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('user-btn').style.display = 'none'; // 모달 닫기
+            document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
         }
     } catch (error) {
         console.error('Error:', error);
