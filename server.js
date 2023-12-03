@@ -107,11 +107,12 @@ app.post('/logout', (req, res) => {
 });
 
 // profile 엔드포인트 수정
-app.post('/profile', (req, res) => {
+app.get('/profile', (req, res) => {
     if (req.session.user) {
-        res.status(200).send('로그인됨');
+        const { username } = req.session.user; // 세션에 저장된 사용자 정보에서 이름 추출
+        res.status(200).json({ username }); // 이름을 JSON 형태로 클라이언트에 전달
     } else {
-        res.status(401).send('로그인이 필요합니다');
+        res.status(401).send('Not logged in');
     }
 });
 
