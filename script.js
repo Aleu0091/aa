@@ -75,6 +75,8 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     try {
         const response = await fetch(url + 'login', {
             method: 'POST',
+            credentials: 'include',
+
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -143,7 +145,10 @@ async function getProfile() {
     try {
         const response = await fetch(url + 'profile', {
             method: 'GET',
-            credentials: 'include' // 세션 쿠키를 전송하기 위해 필요
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            } // 세션 쿠키를 전송하기 위해 필요
         });
         const data = await response.json();
         if (response.ok) {
