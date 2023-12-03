@@ -149,6 +149,7 @@ async function getProfile() {
         if (response.ok) {
             const data = await response.json();
             console.log('사용자 이메일:', data.email);
+            href = '/study.html';
             // 여기에서 필요한 동작 수행 (프로필 정보를 표시하거나 화면을 업데이트하는 등)
         } else {
             // 로그인되지 않은 경우
