@@ -147,15 +147,19 @@ document.getElementById('st_btn').addEventListener('click', async () => {
         credentials: 'include'
     })
         .then((response) => {
-            if (response.ok) {
+            if (response.status === 200) {
                 return response.json();
+            } else if (response.status === 401) {
+                alert('로그인이 필요합니다.'); // 로그인이 되지 않은 경우 알림
+                throw new Error('Not logged in.');
+            } else {
+                throw new Error('Network response was not ok.');
             }
-            throw new Error('Network response was not ok.');
         })
         .then((data) => {
             // 서버로부터 받은 데이터 처리
             console.log(data);
-            alert('로그인됨'); // 로그인이 확인되었을 때 알림
+            // 로그인이 확인되었을 때 추가로 작업 가능
         })
         .catch((error) => {
             // 오류 처리
