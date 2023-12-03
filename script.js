@@ -75,12 +75,11 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     try {
         const response = await fetch(url + 'login', {
             method: 'POST',
-            credentials: 'include',
-
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password }),
+            credentials: 'include'
         });
 
         const data = await response.json();
@@ -124,7 +123,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
         const response = await fetch(url + 'logout', {
             method: 'POST',
-            credentials: 'same-origin',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             } // 세션 정보를 전달하기 위해 credentials 설정
