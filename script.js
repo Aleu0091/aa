@@ -152,7 +152,7 @@ async function getProfile() {
             // 여기에서 받아온 프로필 정보를 처리하는 작업을 추가할 수 있습니다.
             // 예를 들어, 가져온 정보를 HTML 요소에 채우는 등의 작업을 수행할 수 있습니다.
         } else {
-            console.error(await response.json());
+            alert('로그인이 필요합니다.');
         }
     } catch (error) {
         console.error('네트워크 에러:', error);
