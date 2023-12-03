@@ -147,8 +147,10 @@ async function getProfile() {
 
         if (response.ok) {
             const profileData = await response.json();
-            console.log('프로필 정보:', profileData);
+            console.log('프로필 정보:', profileData); // 가져온 프로필 정보를 콘솔에 출력
+
             // 여기에서 받아온 프로필 정보를 처리하는 작업을 추가할 수 있습니다.
+            // 예를 들어, 가져온 정보를 HTML 요소에 채우는 등의 작업을 수행할 수 있습니다.
         } else {
             console.error('프로필 정보를 가져오지 못했습니다.');
         }
@@ -159,7 +161,5 @@ async function getProfile() {
 
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
-    getProfile();
+    getProfile(); // 프로필 정보를 가져오는 함수 호출
 });
-
-// 페이지 로드 시 사용자 정보 확인
