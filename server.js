@@ -116,8 +116,13 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
 
 // 로그아웃 엔드포인트
 app.post('/logout', (req, res) => {
-    req.logout();
-    res.status(200).json({ message: '로그아웃 성공' });
+    req.logout(function (err) {
+        if (err) {
+            // 에러 처리
+            return next(err);
+        }
+        res.send('로그아웃 성공');
+    });
 });
 
 // 프로필 엔드포인트
