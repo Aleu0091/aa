@@ -3,6 +3,9 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { MongoClient } = require('mongodb');
 const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 const app = express();
 const corsOptions = {
     origin: 'https://www.poayl.xyz',
@@ -34,7 +37,8 @@ async function connectToMongo() {
 
 connectToMongo();
 
-apassport.use(
+// Passport 로컬 전략 설정
+passport.use(
     new LocalStrategy(async (username, password, done) => {
         try {
             const existingUser = await usersCollection.findOne({ email: username });
