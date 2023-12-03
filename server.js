@@ -34,6 +34,38 @@ async function connectToMongo() {
 
 connectToMongo();
 
+apassport.use(
+    new LocalStrategy(async (username, password, done) => {
+        try {
+            const existingUser = await usersCollection.findOne({ email: username });
+            if (!existingUser) {
+                return done(null, false, { message: '유저를 찾을 수 없음' });
+            }
+
+            const passwordMatch = await bcrypt.compare(password, existingUser.password);
+            if (!passwordMatch) {
+                return done(null, false, { message: '이메일 또는 패스워드 에러' });
+            }
+            return done(null, existingUser);
+        } catch (err) {
+            return done(err);
+        }
+    })
+);
+
+passport.serializeUser((user, done) => {
+    done(null, user._id);
+});
+
+passport.deserializeUser(async (id, done) => {
+    try {
+        const user = await usersCollection.findOne({ _id: id });
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
+});
+
 app.use(
     session({
         secret: 'ajdonnnxkanklaoiendjdikdo',
@@ -46,29 +78,19 @@ app.use(
     })
 );
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.post('/login', async (req, res) => {
-    const { email: loginEmail, password: loginPassword } = req.body;
 
-    try {
-        const existingUser = await usersCollection.findOne({ email: loginEmail });
-        if (!existingUser) {
-            return res.status(404).json({ message: '유저를 찾을 수 없음' });
-        }
-
-        const passwordMatch = await bcrypt.compare(loginPassword, existingUser.password);
-        if (!passwordMatch) {
-            return res.status(401).json({ message: '이메일 또는 패스워드 에러' });
-        }
-        var expiryDate = new Date(Date.now() + 60 * 60 * 1000 * 24 * 7); // 24 hour 7일
-        res.cookie('email', loginEmail, { expires: expiryDate, httpOnly: true, signed: true });
-
-        return res.status(200).json({ message: '로그인 성공', userId: existingUser._id });
-    } catch (err) {
-        return res.status(500).json({ message: 'Database error' });
-    }
-});
+app.post(
+    '/login',
+    passport.authenticate('local', {
+        successRedirect: '/profile',
+        failureRedirect: '/login'
+    })
+);
 
 app.post('/signup', async (req, res) => {
     const { username: signupUsername, email: signupEmail, password: signupPassword } = req.body;
@@ -94,23 +116,22 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+// profile 엔드포인트 수정
 app.post('/logout', (req, res) => {
-    // 쿠키를 클리어하여 로그아웃
-    res.clearCookie('email');
-    res.redirect('/');
+    req.logout();
     res.send('Logged out successfully');
 });
 
-// profile 엔드포인트 수정
-app.get('/profile', (req, res) => {
-    // 쿠키에서 사용자 정보를 가져옴
-    var cookieLoginObj = req.signedCookies.email;
-
-    if (cookieLoginObj && cookieLoginObj.email !== '') {
-        res.status(200).json({ email });
+function requireLogin(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
     } else {
-        res.status(401).send('Not logged in');
+        res.status(401).json({ error: '로그인이 필요합니다' });
     }
+}
+
+app.get('/profile', requireLogin, (req, res) => {
+    res.json(req.session.user);
 });
 
 // File upload and course addition
