@@ -144,8 +144,11 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 document.getElementById('st_btn').addEventListener('click', async () => {
     // 예시: 프로필 정보 요청
     fetch(url + 'profile', {
-        method: 'GET',
-        credentials: 'include' // 요청 시에 자격 증명(cookie)을 포함
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        } // 요청 시에 자격 증명(cookie)을 포함
     })
         .then((response) => {
             if (response.status === 200) {
