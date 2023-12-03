@@ -1,3 +1,298 @@
-<h1>404</h1>
-<h2>Page not found</h2>
-<!--404에러-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>과제 목록</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+
+        <style>
+            /* 모바일에 대한 스타일 */
+            @media (max-width: 800px) {
+                /* 내비게이션 바를 햄버거 버튼으로 변경 */
+                .navbar-toggler {
+                    display: block;
+                }
+
+                .navbar-collapse {
+                    display: none;
+                }
+
+                .navbar-expand .navbar-collapse {
+                    display: none !important;
+                }
+
+                .navbar-toggler-icon {
+                    display: block;
+                    background-color: black;
+                }
+
+                .navbar-toggler:focus {
+                    outline: none;
+                }
+
+                .navbar-collapse.show {
+                    display: block;
+                }
+
+                /* 일부 요소를 가로 정렬로 변경 */
+                .nav-item {
+                    display: inline-block !important;
+                }
+
+                .nav-link {
+                    display: block !important;
+                }
+            }
+        </style>
+    </head>
+    <div class="fixed-top">
+        <button
+            class="navbar-toggler d-lg-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a
+                    href="/"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+                >
+                    <span class="fs-4">Poayl</span>
+                </a>
+
+                <!-- 데스크톱 버전 -->
+
+                <nav class="navbar navbar-expand-md">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
+                        <li class="nav-item"><a href="study.html" class="nav-link">Study</a></li>
+
+                        <li class="nav-item">
+                            <a
+                                href="#"
+                                style="display: flew"
+                                data-bs-toggle="modal"
+                                id="login-btn"
+                                data-bs-target="#exampleModal2"
+                                class="nav-link"
+                                >로그인</a
+                            >
+                        </li>
+                        <button
+                            style="display: flew"
+                            id="signup-btn"
+                            type="button"
+                            class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal1"
+                        >
+                            가입하기
+                        </button>
+                        <div class="dropdown" id="user-btn" style="display: none">
+                            <button
+                                class="btn btn-Primary dropdown-toggle"
+                                type="button"
+                                id="userpage"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                username
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#" id="settingBtn">Setting</a></li>
+                                <li><a class="dropdown-item" id="logoutBtn" href="#">Logout</a></li>
+                                <!-- 기타 언어 항목 추가 -->
+                            </ul>
+                        </div>
+                    </ul>
+                </nav>
+
+                <!-- 모바일 버전 -->
+                <button
+                    class="navbar-toggler d-md-none"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <nav class="navbar-collapse collapse" id="navbarNav" style="display: none">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Study</a></li>
+                        <li class="nav-item"><a href="#" class="nav-linkq">로그인</a></li>
+                        <a class="btn btn-primary" href="/register.html" role="button">가입하기</a>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">회원 가입</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">사용자명</label>
+                            <input type="text" class="form-control" id="username" name="username" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" class="form-control" id="email" name="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" id="password" name="password" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">비밀번호 확인</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                required
+                            />
+                            <span id="error" class="text-danger" style="display: none"
+                                >비밀번호가 일치하지 않습니다.</span
+                            >
+                        </div>
+                        <a href="#" id="switchModal">이미 회원이신가요?</a><br />
+                        <button type="submit" class="btn btn-primary">회원 가입</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="signup_close" data-bs-dismiss="modal">
+                        닫기
+                    </button>
+                    <!-- 추가하고 싶은 다른 버튼들 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">로그인</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" class="form-control" id="email_login" name="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" id="password_login" name="password" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">로그인</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="login_close" data-bs-dismiss="modal">
+                        닫기
+                    </button>
+                    <!-- 추가하고 싶은 다른 버튼들 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br /><br /><br />
+    <div class="container my-5">
+        <div class="bg-body-tertiary p-5 rounded">
+            <div class="col-sm-8 py-5 mx-auto">
+                <h1 id="text1" class="display-5 fw-normal">404 Error</h1>
+                <p id="text2" class="fs-5">page not fond</p>
+                <p>
+                    <br />
+                    <a id="st_btn" class="btn btn-primary" href="javascript:history.back()" role="button">Go back</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div class="container">
+        <footer class="py-5">
+            <div class="row">
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <p>&copy; 2023 Ryu Minjae. All rights reserved.</p>
+                <div class="dropdown">
+                    <button
+                        class="btn btn-Primary dropdown-toggle"
+                        type="button"
+                        id="languageDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        🌐 언어 선택
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko')">한국어</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh')">中文</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('vi')">Tiếng Việt</a></li>
+                        <!-- 기타 언어 항목 추가 -->
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <body>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
