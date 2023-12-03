@@ -89,6 +89,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             document.getElementById('login-btn').style.display = 'none';
             document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
         }
+        alert(data.username);
     } catch (error) {
         console.error('Error:', error);
     }
