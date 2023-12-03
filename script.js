@@ -148,21 +148,25 @@ async function getProfile() {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
-            } // 세션 쿠키를 전송하기 위해 필요
+            }
         });
-        const data = await response.json();
+
         if (response.ok) {
-            // 세션에 사용자 정보가 있는 경우
-            // 특정 동작 수행 (예: 프로필 정보 표시)
+            const data = await response.json();
             console.log('사용자 이름:', data.username);
-        } else {
+            // 특정 동작 수행 (예: 프로필 정보 표시)
+        } else if (response.status === 401) {
             // 세션이 없는 경우
             alert('로그인이 필요합니다');
+        } else {
+            // 다른 오류 처리
+            throw new Error('프로필 정보를 가져오는 중 오류가 발생했습니다.');
         }
     } catch (error) {
         console.error('프로필 정보 가져오기 에러:', error);
     }
 }
+
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
     getProfile();
