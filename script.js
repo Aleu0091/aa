@@ -143,7 +143,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
     try {
-        fetch('https://your-server-url/profile', {
+        fetch(url + 'profile', {
             method: 'POST',
             credentials: 'include' // 세션 쿠키 전송을 위해 필요합니다
         });
