@@ -139,34 +139,28 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
         console.error('네트워크 오류:', error);
     }
 });
-
+async function getProfile() {
+    try {
+        const response = await fetch(url + 'profile', {
+            method: 'GET',
+            credentials: 'include' // 세션 쿠키를 전송하기 위해 필요
+        });
+        const data = await response.json();
+        if (response.ok) {
+            // 세션에 사용자 정보가 있는 경우
+            // 특정 동작 수행 (예: 프로필 정보 표시)
+            console.log('사용자 이름:', data.username);
+        } else {
+            // 세션이 없는 경우
+            alert('로그인이 필요합니다');
+        }
+    } catch (error) {
+        console.error('프로필 정보 가져오기 에러:', error);
+    }
+}
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
-    // 예시: 프로필 정보 요청
-    fetch(url + 'profile', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json'
-        } // 요청 시에 자격 증명(cookie)을 포함
-    })
-        .then((response) => {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                throw new Error('Not logged in');
-            }
-        })
-        .then((data) => {
-            //로그인 성공
-            const { username } = data;
-            console.log(username);
-            // 여기에서 username을 사용하여 필요한 처리를 수행
-        })
-        .catch((error) => {
-            console.error('Error:', error.message);
-            // 로그인되어 있지 않음을 처리
-        });
+    getProfile();
 });
 
 // 페이지 로드 시 사용자 정보 확인

@@ -60,21 +60,13 @@ app.post('/login', async (req, res) => {
         }
 
         req.session.user = existingUser;
-        console.log(req.session.user);
-        res.status(200).json({ message: '로그인 성공', userId: existingUser._id });
+
+        return res.status(200).json({ message: '로그인 성공', userId: existingUser._id });
     } catch (err) {
         return res.status(500).json({ message: 'Database error' });
     }
 });
-app.post('/profile', (req, res) => {
-    console.log(req.session.user);
-    if (req.session.user) {
-        const { username } = req.session.user; // 세션에 저장된 사용자 정보에서 이름 추출
-        res.status(200).json({ username }); // 이름을 JSON 형태로 클라이언트에 전달
-    } else {
-        res.status(401).send('Not logged in');
-    }
-});
+
 app.post('/signup', async (req, res) => {
     const { username: signupUsername, email: signupEmail, password: signupPassword } = req.body;
 
@@ -115,6 +107,18 @@ app.post('/logout', (req, res) => {
 });
 
 // profile 엔드포인트 수정
+app.get('/profile', (req, res) => {
+    // 세션에 사용자 정보가 있는지 확인
+    if (req.session.user) {
+        // 세션에 저장된 사용자 정보에서 이름 추출
+        const { username } = req.session.user;
+        // JSON 형태로 클라이언트에 전달
+        res.status(200).json({ username });
+    } else {
+        // 세션이 없으면 로그인되지 않은 상태로 간주
+        res.status(401).send('Not logged in');
+    }
+});
 
 // File upload and course addition
 
