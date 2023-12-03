@@ -129,6 +129,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 
         if (response.ok) {
             console.log('로그아웃 성공');
+            href = '/';
             // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
         } else {
             console.error('로그아웃 실패');
