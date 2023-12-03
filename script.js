@@ -142,21 +142,25 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
-    try {
-        fetch(url + 'profile', {
-            method: 'POST',
-            credentials: 'include' // 세션 쿠키 전송을 위해 필요합니다
+    fetch(url + 'profile', {
+        method: 'POST',
+        credentials: 'include'
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then((data) => {
+            // 서버로부터 받은 데이터 처리
+            console.log(data);
+            alert('로그인됨'); // 로그인이 확인되었을 때 알림
+        })
+        .catch((error) => {
+            // 오류 처리
+            console.error('There has been a problem with your fetch operation:', error);
         });
-        if (response.status === 200) {
-            // 서버로부터 사용자 정보를 받았을 때의 처리
-            href = '/study.html';
-        } else if (response.status === 401) {
-            // 로그인되지 않은 상태일 때의 처리
-            return alert('로그인 해주세요');
-        }
-    } catch (error) {
-        console.error('네트워크 오류:', error);
-    }
 });
 
 // 페이지 로드 시 사용자 정보 확인
