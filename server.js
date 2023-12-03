@@ -1,20 +1,11 @@
 const express = require('express');
-const cors = require('cors');
-const bcrypt = require('bcrypt');
-const { MongoClient } = require('mongodb');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
+const bcrypt = require('bcrypt');
+const { MongoClient } = require('mongodb');
+const cors = require('cors');
 const app = express();
-const corsOptions = {
-    origin: 'https://www.poayl.xyz',
-    credentials: true
-};
-
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // MongoDB 연결 설정
 const uri = 'mongodb+srv://ueged13:VmNMiFeGheGzPZPl@cluster0.zzctp0t.mongodb.net/?retryWrites=true&w=majority';
@@ -32,25 +23,50 @@ async function connectToMongo() {
         console.error('Error connecting to MongoDB:', err);
     }
 }
+const corsOptions = {
+    origin: 'https://www.poayl.xyz',
+    credentials: true
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 connectToMongo();
 
-// Passport 및 LocalStrategy 설정
+// 세션 설정
+app.use(
+    session({
+        secret: 'dfgsdgjvfdslgjm',
+        resave: false,
+        saveUninitialized: false
+    })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Passport Local Strategy 설정
 passport.use(
-    new LocalStrategy({ usernameField: 'email' }, async (username, password, done) => {
+    new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
         try {
-            const existingUser = await usersCollection.findOne({ email: username });
-            if (!existingUser) {
+            const user = await usersCollection.findOne({ email });
+
+            if (!user) {
                 return done(null, false, { message: '유저를 찾을 수 없음' });
             }
 
-            const passwordMatch = await bcrypt.compare(password, existingUser.password);
+            const passwordMatch = await bcrypt.compare(password, user.password);
+
             if (!passwordMatch) {
                 return done(null, false, { message: '이메일 또는 패스워드 에러' });
             }
-            return done(null, existingUser);
-        } catch (err) {
-            return done(err);
+
+            return done(null, user);
+        } catch (error) {
+            return done(error);
         }
     })
 );
@@ -63,26 +79,10 @@ passport.deserializeUser(async (id, done) => {
     try {
         const user = await usersCollection.findOne({ _id: id });
         done(null, user);
-    } catch (err) {
-        done(err);
+    } catch (error) {
+        done(error);
     }
 });
-
-// 세션 설정
-app.use(
-    session({
-        secret: 'ajdonnnxkanklaoiendjdikdo',
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            sameSite: 'None',
-            secure: true
-        }
-    })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 // 회원가입 엔드포인트
 app.post('/signup', async (req, res) => {
@@ -116,8 +116,12 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
 
 // 로그아웃 엔드포인트
 app.post('/logout', (req, res) => {
-    req.logout(); // Passport에서 제공하는 로그아웃 함수를 호출합니다.
-    res.send('로그아웃 성공'); // 클라이언트에게 로그아웃 성공을 응답합니다.
+    setTimeout(() => {
+        req.logout();
+    }, 1000); // Passport에서 제공하는 로그아웃 함수를 호출합니다.
+    res.send('로그아웃 성공');
+    app.use(cors(corsOptions));
+    // 클라이언트에게 로그아웃 성공을 응답합니다.
 });
 
 // 프로필 엔드포인트
@@ -127,10 +131,9 @@ app.get('/profile', requireLogin, (req, res) => {
 
 function requireLogin(req, res, next) {
     if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.status(401).json({ error: '로그인이 필요합니다' });
+        return next();
     }
+    res.status(401).json({ error: '로그인이 필요합니다' });
 }
 
 // 서버 설정
