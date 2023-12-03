@@ -78,9 +78,7 @@
                         <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
                         <li class="nav-item"><a href="study.html" class="nav-link">Study</a></li>
 
-                        <li class="nav-item">
-                            <a href="#" id="logoutBtn" class="nav-link" style="display: none">로그아웃</a>
-                        </li>
+
                         <li class="nav-item">
                             <a
                                 href="#"
@@ -102,6 +100,24 @@
                         >
                             가입하기
                         </button>
+                        <div class="dropdown" id = "user_btn"style="display: none;">
+                            <button
+                                class="btn btn-Primary dropdown-toggle"
+                                type="button"
+                                id="userpage"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                username
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#">English</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko')">Log</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh')">中文</a></li>
+                                <li><a class="dropdown-item" id = "logoutBtn" href="#">Logout</a></li>
+                                <!-- 기타 언어 항목 추가 -->
+                            </ul>
+                        </div>
                     </ul>
                 </nav>
 
@@ -218,7 +234,7 @@
                 <a id="text5">에 동의한 것으로 간주됩니다.</a>
                 <p>
                     <br />
-                    <a id="st_btn"  class="btn btn-primary" role="button">시작하기</a>
+                    <a id="st_btn" class="btn btn-primary" role="button">시작하기</a>
                 </p>
             </div>
         </div>
