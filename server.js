@@ -107,10 +107,11 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/profile', (req, res) => {
-    if (req.session.email) {
-        res.status(200).send('login');
+    if (req.session.user) {
+        // 세션의 user 객체를 확인합니다.
+        res.status(200).json({ message: 'Logged in', user: req.session.user });
     } else {
-        res.status(401).send('Not logged in');
+        res.status(401).json({ message: 'Not logged in' });
     }
 });
 
