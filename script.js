@@ -145,7 +145,7 @@ async function getProfile() {
             credentials: 'include' // 쿠키 전송을 위해 필요
         });
 
-        if (response.status === 200) {
+        if (response.ok) {
             const profileData = await response.json();
             console.log('프로필 정보:', profileData);
             // 여기에서 받아온 프로필 정보를 처리하는 작업을 추가할 수 있습니다.
