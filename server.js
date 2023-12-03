@@ -122,7 +122,7 @@ app.post('/logout', (req, res) => {
 
 // 프로필 엔드포인트
 app.get('/profile', requireLogin, (req, res) => {
-    res.json(req.user);
+    res.send(req.user);
 });
 
 function requireLogin(req, res, next) {

@@ -122,7 +122,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
-        const response = await fetch('/logout', {
+        const response = await fetch(url + '/logout', {
             method: 'POST',
             credentials: 'include' // 쿠키 전송을 위해 필요
         });
