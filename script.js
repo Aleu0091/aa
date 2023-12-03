@@ -138,26 +138,6 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
         console.error('네트워크 에러:', error);
     }
 });
-async function getProfile() {
-    try {
-        const response = await fetch(url + 'profile', {
-            method: 'GET',
-            credentials: 'include' // 쿠키 전송을 위해 필요
-        });
-
-        if (response.ok) {
-            const profileData = await response.json();
-            console.log('프로필 정보:', profileData); // 가져온 프로필 정보를 콘솔에 출력
-
-            // 여기에서 받아온 프로필 정보를 처리하는 작업을 추가할 수 있습니다.
-            // 예를 들어, 가져온 정보를 HTML 요소에 채우는 등의 작업을 수행할 수 있습니다.
-        } else {
-            alert('로그인이 필요합니다.');
-        }
-    } catch (error) {
-        console.error('네트워크 에러:', error);
-    }
-}
 
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
