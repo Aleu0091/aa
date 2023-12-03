@@ -143,14 +143,10 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
     try {
-        const response = await fetch(url + 'profile', {
+        fetch('https://your-server-url/profile', {
             method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            credentials: 'include' // 세션 쿠키 전송을 위해 필요합니다
         });
-
         if (response.status === 200) {
             // 서버로부터 사용자 정보를 받았을 때의 처리
             href = '/study.html';

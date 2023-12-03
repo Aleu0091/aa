@@ -285,23 +285,20 @@
         ></script>
         <script>
             try {
-                const response = await fetch(url + 'profile', {
+                fetch('https://your-server-url/profile', {
                     method: 'POST',
-                    credentials: 'same-origin',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    credentials: 'include' // 세션 쿠키 전송을 위해 필요합니다
                 });
 
                 if (response.status === 200) {
                     // 서버로부터 사용자 정보를 받았을 때의 처리
                     document.getElementById('logoutBtn').style.display = 'flex';
-                document.getElementById('login-btn').style.display = 'none';
-                document.getElementById('signup-btn').style.display = 'none';
+                    document.getElementById('login-btn').style.display = 'none';
+                    document.getElementById('signup-btn').style.display = 'none';
                 } else if (response.status === 401) {
                     // 로그인되지 않은 상태일 때의 처리
                     alert('로그인 해주세요');
-                    href = "/";
+                    href = '/';
                 }
             } catch (error) {
                 console.error('네트워크 오류:', error);
