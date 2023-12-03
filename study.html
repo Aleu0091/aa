@@ -283,6 +283,26 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"
         ></script>
-        <script src="script.js"></script>
+        <script>
+            try {
+                const response = await fetch(url + 'profile', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.status === 200) {
+                    // 서버로부터 사용자 정보를 받았을 때의 처리
+                    href = '/study.html';
+                } else if (response.status === 401) {
+                    // 로그인되지 않은 상태일 때의 처리
+                    return alert('로그인 해주세요');
+                }
+            } catch (error) {
+                console.error('네트워크 오류:', error);
+            }
+        </script>
     </body>
 </html>
