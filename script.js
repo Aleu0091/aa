@@ -156,7 +156,7 @@ document.getElementById('st_btn').addEventListener('click', async () => {
             alert('로그인된 사용자');
         } else if (response.status === 401) {
             // 로그인되지 않은 상태일 때의 처리
-            alert('로그인 해주세요');
+            return alert('로그인 해주세요');
         }
     } catch (error) {
         console.error('네트워크 오류:', error);
