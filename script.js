@@ -139,22 +139,20 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 });
 async function getProfile() {
     try {
-        const response = await fetch(url + 'profile', {
+        const response = await fetch('/profile', {
             method: 'GET',
-            credentials: 'include' // 쿠키 전송을 위해 credentials 설정
+            credentials: 'include' // 쿠키 전송을 위해 필요
         });
+
         if (response.ok) {
-            const data = await response.json();
-            console.log('사용자 이메일:', data.email);
-            href = '/study.html';
-            // 여기에서 필요한 동작 수행 (프로필 정보를 표시하거나 화면을 업데이트하는 등)
+            const profileData = await response.json();
+            console.log('프로필 정보:', profileData);
+            // 여기에서 받아온 프로필 정보를 처리하는 작업을 추가할 수 있습니다.
         } else {
-            // 로그인되지 않은 경우
-            alert('로그인이 필요합니다');
-            // 로그인 페이지로 리다이렉트 또는 로그인 팝업 등의 동작 수행
+            console.error('프로필 정보를 가져오지 못했습니다.');
         }
     } catch (error) {
-        console.error('프로필 정보 가져오기 에러:', error);
+        console.error('네트워크 에러:', error);
     }
 }
 
