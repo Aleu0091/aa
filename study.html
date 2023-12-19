@@ -36,12 +36,9 @@
 
                 <nav class="navbar navbar-expand-md">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Study</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
+                        <li class="nav-item"><a href="study.html" class="nav-link">Study</a></li>
 
-                        <li class="nav-item">
-                            <a href="#" id="logoutBtn" class="nav-link" style="display: none">로그아웃</a>
-                        </li>
                         <li class="nav-item">
                             <a
                                 href="#"
@@ -63,6 +60,22 @@
                         >
                             가입하기
                         </button>
+                        <div class="dropdown" id="user-btn" style="display: none">
+                            <button
+                                class="btn btn-Primary dropdown-toggle"
+                                type="button"
+                                id="userpage"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                username
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#" id="settingBtn">Setting</a></li>
+                                <li><a class="dropdown-item" id="logoutBtn" href="#">Logout</a></li>
+                                <!-- 기타 언어 항목 추가 -->
+                            </ul>
+                        </div>
                     </ul>
                 </nav>
 
@@ -81,7 +94,7 @@
 
                 <nav class="navbar-collapse collapse" id="navbarNav" style="display: none">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Study</a></li>
                         <li class="nav-item"><a href="#" class="nav-linkq">로그인</a></li>
                         <a class="btn btn-primary" href="/register.html" role="button">가입하기</a>
@@ -172,12 +185,12 @@
         <div class="project-container">
             <div class="task">
                 <div class="image-wrapper">
-                    <a href="study/n1.html">
+                    <a href="study/game2/game2.html">
                         <div class="img-container">
-                            <img class="resizeable" src="과제1이미지주소.jpg" alt="과제 1 이미지" />
+                            <img class="resizeable" src="work2.jpg" alt="과제 1 이미지" />
                         </div>
                         <div class="level-info">
-                            <p class="task-title">초급 과제 제목</p>
+                            <p class="task-title">그림 맞추기</p>
                         </div>
                     </a>
                     <div class="level-label">초급</div>
@@ -186,9 +199,9 @@
 
             <div class="task">
                 <div class="image-wrapper">
-                    <a href="study/game1/gmae1.html">
+                    <a href="study/game1/game1.html">
                         <div class="img-container">
-                            <img class="resizeable" src="과제2이미지주소.jpg" alt="과제 2 이미지" />
+                            <img class="resizeable" src="work2.jpg" alt="과제 2 이미지" />
                         </div>
                         <div class="level-info">
                             <p class="task-title">산성비</p>
@@ -284,28 +297,7 @@
             crossorigin="anonymous"
         ></script>
         <script>
-            fetch(url + 'profile', {
-                method: 'GET',
-                credentials: 'include' // 요청 시에 자격 증명(cookie)을 포함
-            })
-                .then((response) => {
-                    if (response.status === 200) {
-                        return response.json();
-                    } else {
-                        throw new Error('Not logged in');
-                    }
-                })
-                .then((data) => {
-                    //로그인 성공
-                    const { username } = data;
-                    console.log(username);
-                    // 여기에서 username을 사용하여 필요한 처리를 수행
-                })
-                .catch((error) => {
-                    console.error('Error:', error.message);
-                    href = '/';
-                });
-            let url = 'https://0868-123-212-234-141.ngrok-free.app/';
+            let url = 'http://localhost:8000/';
             document.getElementById('loginForm').addEventListener('submit', async function (e) {
                 e.preventDefault();
 
@@ -323,10 +315,13 @@
                     });
 
                     const data = await response.json();
+                    const username = data.username;
+                    localStorage.setItem('username', username);
                     alert(data.message);
                     if (data.message === '로그인 성공') {
                         document.getElementById('user-btn').style.display = 'flex';
                         document.getElementById('login-btn').style.display = 'none';
+                        document.getElementById('userpage').innerText = username + '님';
                         document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
                     }
                 } catch (error) {
@@ -369,6 +364,7 @@
                     if (response.ok) {
                         // 변경 필요
                         console.log('로그아웃 성공');
+
                         window.location.href = '/'; // 로그아웃 후 리다이렉트
                         // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
                     } else {
@@ -378,6 +374,21 @@
                     console.error('네트워크 에러:', error);
                 }
             });
+            function checkLoginStatus() {
+                var username = localStorage.getItem('username');
+
+                if (username) {
+                    document.getElementById('user-btn').style.display = 'flex';
+                    document.getElementById('login-btn').style.display = 'none';
+                    document.getElementById('userpage').innerText = username + '님';
+                    document.getElementById('signup-btn').style.display = 'none';
+                } else {
+                    console.log('로그인되지 않음');
+                }
+            }
+
+            // 페이지 로드 시 사용자 상태 확인
+            window.onload = checkLoginStatus();
         </script>
     </body>
 </html>

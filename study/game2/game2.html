@@ -1,55 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>과제 목록</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
+<html>
+    <title>Random Image Placement</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+    />
+    <style>
+        /* 이미지 컨테이너 스타일 */
+        .image-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
 
-        <style>
-            /* 모바일에 대한 스타일 */
-            @media (max-width: 800px) {
-                /* 내비게이션 바를 햄버거 버튼으로 변경 */
-                .navbar-toggler {
-                    display: block;
-                }
+        /* 이미지 스타일 */
+        .random-image {
+            max-width: 100px;
+            max-height: 100px;
+            position: absolute;
+            cursor: pointer;
+        }
 
-                .navbar-collapse {
-                    display: none;
-                }
-
-                .navbar-expand .navbar-collapse {
-                    display: none !important;
-                }
-
-                .navbar-toggler-icon {
-                    display: block;
-                    background-color: black;
-                }
-
-                .navbar-toggler:focus {
-                    outline: none;
-                }
-
-                .navbar-collapse.show {
-                    display: block;
-                }
-
-                /* 일부 요소를 가로 정렬로 변경 */
-                .nav-item {
-                    display: inline-block !important;
-                }
-
-                .nav-link {
-                    display: block !important;
-                }
+        /* 모바일에 대한 스타일 */
+        @media (max-width: 800px) {
+            /* 내비게이션 바를 햄버거 버튼으로 변경 */
+            .navbar-toggler {
+                display: block;
             }
-        </style>
-    </head>
+
+            .navbar-collapse {
+                display: none;
+            }
+
+            .navbar-expand .navbar-collapse {
+                display: none !important;
+            }
+
+            .navbar-toggler-icon {
+                display: block;
+                background-color: black;
+            }
+
+            .navbar-toggler:focus {
+                outline: none;
+            }
+
+            .navbar-collapse.show {
+                display: block;
+            }
+
+            /* 일부 요소를 가로 정렬로 변경 */
+            .nav-item {
+                display: inline-block !important;
+            }
+
+            .nav-link {
+                display: block !important;
+            }
+        }
+    </style>
 
     <div class="fixed-top">
         <button
@@ -220,80 +232,97 @@
             </div>
         </div>
     </div>
-    <br /><br /><br /><br /><br /><br />
-    <div class="container my-5">
-        <div class="bg-body-tertiary p-5 rounded">
-            <div class="col-sm-8 py-5 mx-auto">
-                <h1 id="text1" class="display-5 fw-normal">404</h1>
-                <p id="text2" class="fs-5">Page Not Found</p>
-                <p>
-                    <br />
-                    <a id="st_btn" class="btn btn-primary" href="javascript:history.back()" role="button">Go back</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    <div class="image-container"></div>
 
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <div class="container">
-        <footer class="py-5">
-            <div class="row">
-                <div class="col-6 col-md-2 mb-3">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-                    </ul>
-                </div>
-            </div>
+    <script>
+        // 이미지 URL 배열 (랜덤 이미지)
+        const imageUrls = [
+            'https://via.placeholder.com/150',
+            'https://via.placeholder.com/150',
+            'https://via.placeholder.com/150'
+            // 다른 이미지 URL들...
+        ];
 
-            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>&copy; 2023 Ryu Minjae. All rights reserved.</p>
-                <div class="dropdown">
-                    <button
-                        class="btn btn-Primary dropdown-toggle"
-                        type="button"
-                        id="languageDropdown"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        🌐 언어 선택
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko')">한국어</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh')">中文</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('vi')">Tiếng Việt</a></li>
-                        <!-- 기타 언어 항목 추가 -->
-                    </ul>
-                </div>
-            </div>
-        </footer>
-    </div>
+        // 이미지를 무작위로 배치하는 함수
+        function placeRandomImages(numImages) {
+            const container = document.querySelector('.image-container');
+            const placedPositions = [];
 
-    <body>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+            // 랜덤 이미지 추가
+            for (let i = 0; i < numImages; i++) {
+                const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+
+                const img = document.createElement('img');
+                img.src = randomImageUrl;
+                img.classList.add('random-image');
+                img.dataset.name = `Image ${i + 1}`; // 이미지에 이름 속성 추가
+                img.addEventListener('click', () => displayImageName(img.dataset.name)); // 클릭 이벤트 추가
+
+                let x, y;
+                do {
+                    x = Math.random() * (container.offsetWidth - img.width);
+                    y = Math.random() * (container.offsetHeight - img.height);
+                } while (checkOverlap(x, y, placedPositions));
+
+                placedPositions.push({ x, y });
+
+                img.style.left = `${x}px`;
+                img.style.top = `${y}px`;
+
+                container.appendChild(img);
+            }
+
+            // 항상 나오는 이미지 추가
+            const staticImageUrl = 'https://via.placeholder.com/200'; // 항상 나오는 이미지 URL
+            const staticImg = document.createElement('img');
+            staticImg.src = 'https://github.githubassets.com/assets/illu-codespaces-1d2d17e8b2b7.png';
+            staticImg.classList.add('random-image');
+            staticImg.dataset.name = 'Always Visible Image';
+            staticImg.addEventListener('click', () => displayImageName(staticImg.dataset.name)); // 클릭 이벤트 추가
+            staticImg.style.left = `${Math.random() * (container.offsetWidth - staticImg.width)}px`;
+            staticImg.style.top = `${Math.random() * (container.offsetHeight - staticImg.height)}px`;
+            container.appendChild(staticImg);
+        }
+
+        // 이미지가 겹치는지 확인하는 함수
+        function checkOverlap(x, y, placedPositions) {
+            const threshold = 50; // 이미지 간격
+            for (const position of placedPositions) {
+                if (Math.abs(position.x - x) < threshold && Math.abs(position.y - y) < threshold) {
+                    return true; // 겹치는 경우
+                }
+            }
+            return false; // 겹치지 않는 경우
+        }
+
+        // 이미지 이름을 표시하는 함수
+        function displayImageName(name) {
+            alert(`이미지 이름: ${name}`);
+        }
+
+        // 페이지 로드 시 이미지 배치
+        window.addEventListener('load', () => {
+            placeRandomImages(5); // 이미지 수 조절 가능
+        });
+    </script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+    ></script>
 </html>

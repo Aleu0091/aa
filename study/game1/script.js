@@ -167,7 +167,7 @@ tajaBtn.addEventListener('click', function () {
 });
 
 // 음성 인식 시작
-let url = 'https://0868-123-212-234-141.ngrok-free.app/';
+let url = 'http://localhost:8000/';
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -185,10 +185,13 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         });
 
         const data = await response.json();
+        const username = data.username;
+        localStorage.setItem('username', username);
         alert(data.message);
         if (data.message === '로그인 성공') {
             document.getElementById('user-btn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
+            document.getElementById('userpage').innerText = username + '님';
             document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
         }
     } catch (error) {
@@ -231,6 +234,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
         if (response.ok) {
             // 변경 필요
             console.log('로그아웃 성공');
+
             window.location.href = '/'; // 로그아웃 후 리다이렉트
             // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
         } else {
@@ -240,3 +244,18 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
         console.error('네트워크 에러:', error);
     }
 });
+function checkLoginStatus() {
+    var username = localStorage.getItem('username');
+
+    if (username) {
+        document.getElementById('user-btn').style.display = 'flex';
+        document.getElementById('login-btn').style.display = 'none';
+        document.getElementById('userpage').innerText = username + '님';
+        document.getElementById('signup-btn').style.display = 'none';
+    } else {
+        console.log('로그인되지 않음');
+    }
+}
+
+// 페이지 로드 시 사용자 상태 확인
+window.onload = checkLoginStatus();
