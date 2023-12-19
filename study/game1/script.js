@@ -134,18 +134,19 @@ recognition.addEventListener('result', (e) => {
     if (transcript.trim().length === 2) {
         tajaText.value = transcript.trim(); // 음성으로
 
-    // 입력한 단어와 일치하는지 확인하여 처리
-    for (let i = 0; i < newObj.length; i++) {
-        if (tajaText.value === newObj[i].innerHTML) {
-            tajaContents.removeChild(newObj[i]);
-            score += 100;
-            scoreDiv.innerHTML = 'SCORE : ' + score;
+        // 입력한 단어와 일치하는지 확인하여 처리
+        for (let i = 0; i < newObj.length; i++) {
+            if (tajaText.value === newObj[i].innerHTML) {
+                tajaContents.removeChild(newObj[i]);
+                score += 100;
+                scoreDiv.innerHTML = 'SCORE : ' + score;
 
-            if (newObj.length === taja.length) {
-                if (!tajaContents.hasChildNodes()) {
-                    alert('다음 단계로 이동합니다.(준비중)');
-                    alert('총 ' + score + '점을 획득하였습니다.');
-                    location.reload();
+                if (newObj.length === taja.length) {
+                    if (!tajaContents.hasChildNodes()) {
+                        alert('다음 단계로 이동합니다.(준비중)');
+                        alert('총 ' + score + '점을 획득하였습니다.');
+                        location.reload();
+                    }
                 }
             }
         }
