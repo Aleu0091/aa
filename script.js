@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 // 비밀번호 일치 여부 확인 함수
-let url = 'https://4bf9-123-212-234-141.ngrok-free.app/';
+let url = 'http://localhost:8000/';
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -91,6 +91,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             document.getElementById('login-btn').style.display = 'none';
             document.getElementById('userpage').innerText = username + '님';
             document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
+            window.location.href = '/'; // 로그아웃 후 리다이렉트
         }
     } catch (error) {
         console.error('Error:', error);
