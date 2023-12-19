@@ -130,7 +130,9 @@ recognition.addEventListener('result', (e) => {
     const transcript = Array.from(e.results)
         .map((result) => result[0].transcript)
         .join('');
-    tajaText.value = transcript.trim(); // 음성으로 인식된 단어를 input에 넣음
+    // 음성으로 인식된 글자가 정확히 두 글자일 때만 처리
+    if (transcript.trim().length === 2) {
+        tajaText.value = transcript.trim(); // 음성으로
 
     // 입력한 단어와 일치하는지 확인하여 처리
     for (let i = 0; i < newObj.length; i++) {
