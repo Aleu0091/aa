@@ -280,16 +280,15 @@
             document.getElementById('submit123').addEventListener('click', async function (e) {
                 e.preventDefault();
 
-                const email = document.getElementById('floatingInput').value;
+                const username = document.getElementById('floatingInput').value;
                 const password = document.getElementById('floatingPassword').value;
-                const id = localStorage.getItem('username');
                 try {
                     const response = await fetch(url + 'profile', {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ email, password, id })
+                        body: JSON.stringify({ username, password })
                     });
                     const data = await response.json();
                     let un = data.username;
