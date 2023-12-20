@@ -133,7 +133,6 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
             credentials: 'include' // 쿠키 전송을 위해 필요
         });
         localStorage.removeItem('username');
-        localStorage.removeItem('id', data._id);
 
         if (response.ok) {
             // 변경 필요
