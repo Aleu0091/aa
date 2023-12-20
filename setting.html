@@ -207,14 +207,13 @@
 
                 const email = document.getElementById('floatingInput').value;
                 const password = document.getElementById('floatingPassword').value;
-
                 try {
                     const response = await fetch(url + 'login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ email, password }),
+                        body: JSON.stringify({ email, password, id }),
                         credentials: 'include'
                     });
 
@@ -283,14 +282,14 @@
 
                 const email = document.getElementById('floatingInput').value;
                 const password = document.getElementById('floatingPassword').value;
-
+                const id = localStorage.getItem('username');
                 try {
                     const response = await fetch(url + 'profile', {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ email, password })
+                        body: JSON.stringify({ email, password, id })
                     });
                     const data = await response.json();
                     let un = data.username;
