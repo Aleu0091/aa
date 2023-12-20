@@ -142,6 +142,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
             // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
         } else {
             console.error('로그아웃 실패');
+            localStorage.removeItem('username');
         }
     } catch (error) {
         console.error('네트워크 에러:', error);
