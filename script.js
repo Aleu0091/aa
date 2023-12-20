@@ -120,7 +120,10 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         console.error('Error:', error);
     }
 });
-
+// 로그인 폼 제출 시
+document.getElementById('signup-btn').addEventListener('click', async () => {
+    window.location.href = '/auth/signup.html'; // 로그아웃 후 리다이렉트
+});
 // 로그인 폼 제출 시
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
