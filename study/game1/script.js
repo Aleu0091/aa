@@ -170,60 +170,9 @@ tajaBtn.addEventListener('click', function () {
 });
 
 // 음성 인식 시작
-let url = 'https://4bf9-123-212-234-141.ngrok-free.app/';
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
 
-    const email = document.getElementById('email_login').value;
-    const password = document.getElementById('password_login').value;
-
-    try {
-        const response = await fetch(url + 'login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password }),
-            credentials: 'include'
-        });
-
-        const data = await response.json();
-        const username = data.username;
-        localStorage.setItem('username', username);
-        alert(data.message);
-        if (data.message === '로그인 성공') {
-            document.getElementById('user-btn').style.display = 'flex';
-            document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('userpage').innerText = username + '님';
-            document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
 // 비밀번호 일치 여부 확인 및 오류 메시지 처리
 // 회원가입 폼 제출 시
-document.getElementById('signupForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        const response = await fetch(url + 'signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, email, password })
-        });
-        const data = await response.json();
-        alert(data.message);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
 
 // 로그인 폼 제출 시
 
@@ -233,6 +182,9 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
             method: 'POST',
             credentials: 'include' // 쿠키 전송을 위해 필요
         });
+
+        localStorage.removeItem('id', data._id);
+        localStorage.removeItem('name', data.username);
 
         if (response.ok) {
             // 변경 필요

@@ -133,6 +133,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
             credentials: 'include' // 쿠키 전송을 위해 필요
         });
         localStorage.removeItem('username');
+        localStorage.removeItem('id', data._id);
 
         if (response.ok) {
             // 변경 필요
@@ -142,8 +143,6 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
             // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
         } else {
             console.error('로그아웃 실패');
-            localStorage.removeItem('username');
-            window.location.href = '/'; // 로그아웃 후 리다이렉트
         }
     } catch (error) {
         console.error('네트워크 에러:', error);

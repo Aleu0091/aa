@@ -221,6 +221,7 @@
                     const data = await response.json();
                     const username = data.username;
                     localStorage.setItem('username', username);
+                    localStorage.setItem('id', data._id);
                     alert(data.message);
                     if (data.message === '로그인 성공') {
                         document.getElementById('user-btn').style.display = 'flex';
@@ -249,6 +250,8 @@
                         credentials: 'include' // 쿠키 전송을 위해 필요
                     });
                     localStorage.removeItem('username');
+                    localStorage.removeItem('id', data._id);
+
 
                     if (response.ok) {
                         // 변경 필요
