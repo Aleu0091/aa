@@ -143,6 +143,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
         } else {
             console.error('로그아웃 실패');
             localStorage.removeItem('username');
+            window.location.href = '/'; // 로그아웃 후 리다이렉트
         }
     } catch (error) {
         console.error('네트워크 에러:', error);
