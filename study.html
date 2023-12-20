@@ -89,6 +89,82 @@
         </div>
     </div>
 
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">회원 가입</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">사용자명</label>
+                            <input type="text" class="form-control" id="username" name="username" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" class="form-control" id="email" name="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" id="password" name="password" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">비밀번호 확인</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                required
+                            />
+                            <span id="error" class="text-danger" style="display: none"
+                                >비밀번호가 일치하지 않습니다.</span
+                            >
+                        </div>
+                        <a href="#" id="switchModal">이미 회원이신가요?</a><br />
+                        <button type="submit" class="btn btn-primary">회원 가입</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="signup_close" data-bs-dismiss="modal">
+                        닫기
+                    </button>
+                    <!-- 추가하고 싶은 다른 버튼들 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">로그인</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" class="form-control" id="email_login" name="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" id="password_login" name="password" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">로그인</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="login_close" data-bs-dismiss="modal">
+                        닫기
+                    </button>
+                    <!-- 추가하고 싶은 다른 버튼들 -->
+                </div>
+            </div>
+        </div>
+    </div>
     <body>
         <br /><br /><br /><br /><br /><br /><br />
         <div class="project-container">
@@ -296,15 +372,13 @@
                 } else {
                     console.log('로그인되지 않음');
                 }
-            }
-
-            // 페이지 로드 시 사용자 상태 확인
-            window.onload = checkLoginStatus(); // 로그인 폼 제출 시
+            } // 로그인 폼 제출 시
             document.getElementById('signup-btn').addEventListener('click', async () => {
                 window.location.href = '/auth/signup.html'; // 로그아웃 후 리다이렉트
             });
 
             // 페이지 로드 시 사용자 상태 확인
+            window.onload = checkLoginStatus();
         </script>
     </body>
 </html>
