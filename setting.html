@@ -292,10 +292,11 @@
                         },
                         body: JSON.stringify({ username, password })
                     });
-                    localStorage.removeItem('username');
-                    localStorage.setItem('username', data.username);
-
                     const data = await response.json();
+                    let un = data.username;
+                    localStorage.removeItem('username');
+                    localStorage.setItem('username', un);
+
                     alert(data.message); // 서버에서 받은 메시지를 보여줍니다.
                     window.location.reload(); // 페이지 새로고침
                 } catch (error) {
