@@ -27,11 +27,11 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const data = await response.json();
         const username = data.username;
         localStorage.setItem('username', username);
-        alert(data.message);
         if (data.message === '로그인 성공') {
+            alert('登录成功');
             document.getElementById('user-btn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('userpage').innerText = username + '님';
+            document.getElementById('userpage').innerText = username;
             document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
             window.location.href = '/'; // 로그아웃 후 리다이렉트
         }
@@ -107,5 +107,5 @@ window.onload = checkLoginStatus();
 
 // 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
-    window.location.href = '/study.html';
+    window.location.href = 'study.html';
 });

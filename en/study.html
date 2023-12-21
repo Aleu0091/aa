@@ -40,10 +40,10 @@
                         <li class="nav-item"><a href="study.html" class="nav-link">Study</a></li>
 
                         <li class="nav-item">
-                            <a style="display: flew" href="/auth/login.html" id="login-btn" class="nav-link">로그인</a>
+                            <a style="display: flew" href="/auth/login.html" id="login-btn" class="nav-link">Login</a>
                         </li>
                         <button style="display: flew" id="signup-btn" type="button" class="btn btn-primary">
-                            가입하기
+                            SignUp
                         </button>
                         <div class="dropdown" id="user-btn" style="display: none">
                             <button
@@ -323,7 +323,7 @@
                     if (data.message === '로그인 성공') {
                         document.getElementById('user-btn').style.display = 'flex';
                         document.getElementById('login-btn').style.display = 'none';
-                        document.getElementById('userpage').innerText = username + '님';
+                        document.getElementById('userpage').innerText = username;
                         document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
                         window.location.href = '/study.html'; // 로그아웃 후 리다이렉트
                     }
@@ -384,7 +384,7 @@
                 if (username) {
                     document.getElementById('user-btn').style.display = 'flex';
                     document.getElementById('login-btn').style.display = 'none';
-                    document.getElementById('userpage').innerText = username + '님';
+                    document.getElementById('userpage').innerText = username;
                     document.getElementById('signup-btn').style.display = 'none';
                 } else {
                     console.log('로그인되지 않음');

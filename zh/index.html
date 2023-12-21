@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>난독 치료 프로그램</title>
+        <title>阅读障碍治疗计划</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -76,14 +76,14 @@
 
                 <nav class="navbar navbar-expand-md">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
-                        <li class="nav-item"><a href="study.html" class="nav-link">Study</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">家</a></li>
+                        <li class="nav-item"><a href="study.html" class="nav-link">学习</a></li>
 
                         <li class="nav-item">
-                            <a style="display: flew" id="login-btn" class="nav-link" href="/auth/login.html">로그인</a>
+                            <a style="display: flew" id="login-btn" class="nav-link" href="/auth/login.html">登录</a>
                         </li>
                         <button style="display: flew" id="signup-btn" type="button" class="btn btn-primary">
-                            가입하기
+                            成为会员
                         </button>
                         <div class="dropdown" id="user-btn" style="display: none">
                             <button
@@ -96,8 +96,8 @@
                                 username
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <li><a class="dropdown-item" href="/setting.html" id="settingBtn">Setting</a></li>
-                                <li><a class="dropdown-item" id="logoutBtn" href="#">Logout</a></li>
+                                <li><a class="dropdown-item" href="/setting.html" id="settingBtn">环境</a></li>
+                                <li><a class="dropdown-item" id="logoutBtn" href="#">登出</a></li>
                                 <!-- 기타 언어 항목 추가 -->
                             </ul>
                         </div>
@@ -133,25 +133,25 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">회원 가입</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">报名</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="signupForm">
                         <div class="mb-3">
-                            <label for="username" class="form-label">사용자명</label>
+                            <label for="username" class="form-label">姓名</label>
                             <input type="text" class="form-control" id="username" name="username" required />
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">이메일</label>
+                            <label for="email" class="form-label">电子邮件</label>
                             <input type="email" class="form-control" id="email" name="email" required />
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">비밀번호</label>
+                            <label for="password" class="form-label">密码</label>
                             <input type="password" class="form-control" id="password" name="password" required />
                         </div>
                         <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">비밀번호 확인</label>
+                            <label for="confirmPassword" class="form-label">验证密码 </label>
                             <input
                                 type="password"
                                 class="form-control"
@@ -209,15 +209,14 @@
     <div class="container my-5">
         <div class="bg-body-tertiary p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
-                <h1 id="text1" class="display-5 fw-normal">난독 치료 프로그램</h1>
-                <p id="text2" class="fs-5">이 프로그램은 공익을 위한 프로그램으로 개발 되어 100% 무료로 제공됩니다.</p>
+                <h1 id="text1" class="display-5 fw-normal">阅读障碍治疗计划</h1>
+                <p id="text2" class="fs-5">该计划是作为一项公益计划而开发的，并且 100% 免费提供。</p>
 
-                <a id="text3">시작을 하면</a>
-                <a id="text4" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="mx-1">이용약관</a>
-                <a id="text5">에 동의한 것으로 간주됩니다.</a>
+                <a id="text3">开始即表示您同意我们的</a>
+                <a id="text4" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="mx-1">使用条款。</a>
                 <p>
                     <br />
-                    <a id="st_btn" class="btn btn-primary" role="button">시작하기</a>
+                    <a id="st_btn" class="btn btn-primary" role="button">入门</a>
                 </p>
             </div>
         </div>
@@ -227,38 +226,19 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">이용약관</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">使用条款</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="termsEnglish" style="display: none">
-                        Your information will be used for better learning through big data analysis. Also, it will be
-                        safely destroyed automatically 15 days after withdrawal from the site. Department processing
-                        requests for access to personal information: Security department
-                        <br />Collected information: Pronunciation data, Name, Age, IP
-                    </div>
-                    <div id="termsKorean">
-                        회원님의 정보는 회원님의 보다 더좋은 학습을 위해 빅데이터 학습으로 사용됩니다.<br />
-                        또한 사이트 탈퇴시 15일뒤 자동으로 안전하게 파기됩니다.<br />개인정보의 열람청구를 접수·처리하는
-                        부서 : 보안부서
-                        <br />
-                        수집정보 : 발음 데이터 , 이름 , 나이 ,Ip
-                    </div>
-                    <div id="termsChinese" style="display: none">
+                    <div id="termsChinese">
                         你的信息将用于通过大数据分析进行更好的学习。 此外，它将在从网站撤销后的15天内自动安全销毁。
                         处理个人信息访问请求的部门：安全部门
                         <br />收集信息：发音数据，姓名，年龄，IP
                     </div>
-                    <div id="termsVietnamese" style="display: none">
-                        Thông tin của bạn sẽ được sử dụng để cải thiện hơn trong việc học thông qua phân tích dữ liệu
-                        lớn. Ngoài ra, nó sẽ được hủy an toàn tự động sau 15 ngày kể từ khi rút khỏi trang web. Bộ phận
-                        xử lý yêu cầu truy cập thông tin cá nhân: Bộ phận an ninh
-                        <br />Thông tin được thu thập: Dữ liệu phát âm, Tên, Tuổi, IP
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirmBtn">
-                        이해 했습니다.
+                        理解。
                     </button>
                 </div>
             </div>
@@ -293,10 +273,10 @@
                         🌐 언어 선택
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <li><a class="dropdown-item" href="/en/" onclick="changeLanguage('en')">English</a></li>
-                        <li><a class="dropdown-item" href="/" onclick="changeLanguage('ko')">한국어</a></li>
-                        <li><a class="dropdown-item" href="/zh/" onclick="changeLanguage('zh')">中文</a></li>
-                        <li><a class="dropdown-item" href="/vi/" onclick="changeLanguage('vi')">Tiếng Việt</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko')">한국어</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh')">中文</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('vi')">Tiếng Việt</a></li>
                         <!-- 기타 언어 항목 추가 -->
                     </ul>
                 </div>
