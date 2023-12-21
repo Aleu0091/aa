@@ -31,7 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         if (data.message === '로그인 성공') {
             document.getElementById('user-btn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('userpage').innerText = username + '님';
+            document.getElementById('userpage').innerText = username;
             document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
             window.location.href = '/'; // 로그아웃 후 리다이렉트
         }
@@ -95,7 +95,7 @@ function checkLoginStatus() {
     if (username) {
         document.getElementById('user-btn').style.display = 'flex';
         document.getElementById('login-btn').style.display = 'none';
-        document.getElementById('userpage').innerText = username + '님';
+        document.getElementById('userpage').innerText = username;
         document.getElementById('signup-btn').style.display = 'none';
     } else {
         console.log('로그인되지 않음');
