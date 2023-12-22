@@ -32,7 +32,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             document.getElementById('user-btn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
             document.getElementById('userpage').innerText = username + '님';
-            document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
+            document.getElementById('signup-btn').style.display = 'none'; //FIXME 모달 닫기
             window.location.href = '/'; // 로그아웃 후 리다이렉트
         }
     } catch (error) {

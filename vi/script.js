@@ -32,7 +32,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             document.getElementById('user-btn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
             document.getElementById('userpage').innerText = username;
-            document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
+            document.getElementById('signup-btn').style.display = 'none'; //창 닫기
             window.location.href = '/'; // 로그아웃 후 리다이렉트
         }
     } catch (error) {
@@ -77,11 +77,9 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
         localStorage.removeItem('username');
 
         if (response.ok) {
-            // 변경 필요
             console.log('로그아웃 성공');
 
             window.location.href = '/'; // 로그아웃 후 리다이렉트
-            // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
         } else {
             console.error('로그아웃 실패');
         }
@@ -105,7 +103,6 @@ function checkLoginStatus() {
 // 페이지 로드 시 사용자 상태 확인
 window.onload = checkLoginStatus();
 
-// 클라이언트 측 코드
 document.getElementById('st_btn').addEventListener('click', async () => {
     window.location.href = '/study.html';
 });
