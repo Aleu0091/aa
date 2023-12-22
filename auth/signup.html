@@ -150,6 +150,7 @@
                     </div>
                 </div>
             </div>
+            <br /><br /><br /><br /><br /><br /><br /><br />
             <div class="container">
                 <footer class="py-5">
                     <div class="row">
@@ -241,6 +242,9 @@
                     });
                     const data = await response.json();
                     alert(data.message);
+                    if (response.ok) {
+                        window.location.href = '/auth/login.html'; // 로그인 페이지로 리다이렉트
+                    }
                 } catch (error) {
                     console.error('Error:', error);
                 }

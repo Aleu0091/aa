@@ -104,5 +104,5 @@ function checkLoginStatus() {
 window.onload = checkLoginStatus();
 
 document.getElementById('st_btn').addEventListener('click', async () => {
-    window.location.href = '/study.html';
+    window.location.href = 'study.html';
 });
