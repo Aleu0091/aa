@@ -1,13 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var navbarToggler = document.querySelector('.navbar-toggler');
-    var navbarCollapse = document.querySelector('.navbar-collapse');
-
-    navbarToggler.addEventListener('click', function () {
-        navbarCollapse.classList.toggle('show');
-    });
-});
-// 비밀번호 일치 여부 확인 함수
-let url = 'http://localhost:8000/';
+let url = 'https://1432-123-212-234-141.ngrok-free.app/';
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -27,13 +18,14 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const data = await response.json();
         const username = data.username;
         localStorage.setItem('username', username);
+        localStorage.setItem('id', data._id);
+        alert(data.message);
         if (data.message === '로그인 성공') {
-            alert('登录成功');
             document.getElementById('user-btn').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('userpage').innerText = username;
+            document.getElementById('userpage').innerText = username + '님';
             document.getElementById('signup-btn').style.display = 'none'; // 모달 닫기
-            window.location.href = '/'; // 로그아웃 후 리다이렉트
+            window.location.href = '/study.html'; // 로그아웃 후 리다이렉트
         }
     } catch (error) {
         console.error('Error:', error);
@@ -62,10 +54,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         console.error('Error:', error);
     }
 });
-// 로그인 폼 제출 시
-document.getElementById('signup-btn').addEventListener('click', async () => {
-    window.location.href = '/auth/signup.html'; // 로그아웃 후 리다이렉트
-});
+
 // 로그인 폼 제출 시
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
@@ -95,17 +84,15 @@ function checkLoginStatus() {
     if (username) {
         document.getElementById('user-btn').style.display = 'flex';
         document.getElementById('login-btn').style.display = 'none';
-        document.getElementById('userpage').innerText = username;
+        document.getElementById('userpage').innerText = username + '님';
         document.getElementById('signup-btn').style.display = 'none';
     } else {
         console.log('로그인되지 않음');
     }
-}
+} // 로그인 폼 제출 시
+document.getElementById('signup-btn').addEventListener('click', async () => {
+    window.location.href = '/auth/signup.html'; // 로그아웃 후 리다이렉트
+});
 
 // 페이지 로드 시 사용자 상태 확인
 window.onload = checkLoginStatus();
-
-// 클라이언트 측 코드
-document.getElementById('st_btn').addEventListener('click', async () => {
-    window.location.href = 'study.html';
-});
