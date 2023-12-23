@@ -171,11 +171,6 @@ tajaBtn.addEventListener('click', function () {
 
 // 음성 인식 시작
 
-// 비밀번호 일치 여부 확인 및 오류 메시지 처리
-// 회원가입 폼 제출 시
-
-// 로그인 폼 제출 시
-
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
         const response = await fetch(url + 'logout', {
