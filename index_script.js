@@ -1,3 +1,4 @@
+alert('서버가 개발 완료되지 않았습니다.');
 document.addEventListener('DOMContentLoaded', function () {
     var navbarToggler = document.querySelector('.navbar-toggler');
     var navbarCollapse = document.querySelector('.navbar-collapse');
