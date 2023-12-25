@@ -22,7 +22,6 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
             console.log('로그아웃 성공');
 
             window.location.href = '/'; // 로그아웃 후 리다이렉트
-            // 여기에서 로그아웃 후에 할 작업을 추가할 수 있습니다.
         } else {
             console.error('로그아웃 실패');
         }
